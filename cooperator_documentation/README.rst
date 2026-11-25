@@ -60,6 +60,8 @@ Contributors
 
   - Carmen Bianca BAKKER
 
+- Luca Orioli <lucaorioli@gmail.com>
+
 Maintainers
 -----------
 
