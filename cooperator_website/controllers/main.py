@@ -333,8 +333,7 @@ class WebsiteSubscription(http.Controller):
         min_date = date(1000, 1, 1)
         if birthdate < min_date:
             values["error_msg"] = _(
-                "Please enter the full birth year with all digits "
-                "(e.g., 1990, not 90)."
+                "Please enter the full birth year with all digits (e.g., 1990, not 90)."
             )
         if "error_msg" in values:
             # error message is set: the birthdate is incorrect
