@@ -1,26 +1,18 @@
 # SPDX-FileCopyrightText: 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # SPDX-FileCopyrightText: 2018 Coop IT Easy SC
+# SPDX-FileCopyrightText: 2026 Luca Orioli <lucaorioli@gmail.com>
 # SPDX-FileContributor: Rémy Taymans <remy@coopiteasy.be>
 # SPDX-FileContributor: Houssine Bakkali <houssine@coopiteasy.be>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import _
+from odoo.fields import Domain
 from odoo.http import Response, request, route
-from odoo.osv import expression
 
 from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 
 class CooperatorPortal(PortalAccount):
-    def _get_mandatory_fields(self):
-        return super()._get_mandatory_fields() + [
-            "iban",
-            "birthdate_date",
-            "gender",
-            "lang",
-        ]
-
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
         # We assume that commercial_partner_id always point to the
@@ -84,8 +76,10 @@ class CooperatorPortal(PortalAccount):
         # _prepare_home_portal_values(). by using the context,
         # _prepare_home_portal_values() can be reused as it is for capital
         # release requests.
-        capital_release_request = request.context.get("capital_release_requests", False)
-        return expression.AND(
+        capital_release_request = request.env.context.get(
+            "capital_release_requests", False
+        )
+        return Domain.AND(
             [
                 super()._get_invoices_domain(m_type=m_type),
                 [("release_capital_request", "=", capital_release_request)],
@@ -93,40 +87,64 @@ class CooperatorPortal(PortalAccount):
         )
 
     def _get_capital_release_requests_domain(self):
-        return expression.AND(
+        return Domain.AND(
             [super()._get_invoices_domain(), [("release_capital_request", "=", True)]]
         )
 
-    def details_form_validate(self, data, partner_creation=False):
-        error, error_message = super().details_form_validate(
-            data, partner_creation=partner_creation
+    def _validate_address_values(
+        self,
+        address_values,
+        partner_sudo,
+        address_type,
+        use_delivery_as_billing,
+        required_fields,
+        **kwargs,
+    ):
+        invalid_fields, missing_fields, error_messages = (
+            super()._validate_address_values(
+                address_values,
+                partner_sudo,
+                address_type,
+                use_delivery_as_billing,
+                required_fields,
+                **kwargs,
+            )
         )
-        sub_req_model = request.env["subscription.request"]
-        iban = data.get("iban")
-        valid = sub_req_model.check_iban(iban)
+        if kwargs.get("cooperator_details"):
+            had_missing_fields = bool(missing_fields)
+            for field_name in ("gender", "lang", "birthdate_date"):
+                if not address_values.get(field_name):
+                    missing_fields.add(field_name)
+            iban = kwargs.get("iban")
+            if not iban:
+                missing_fields.add("iban")
+            elif not request.env["subscription.request"].check_iban(iban):
+                invalid_fields.add("iban")
+                error_messages.append(
+                    request.env._("The IBAN account number is not valid.")
+                )
+            if missing_fields and not had_missing_fields:
+                error_messages.append(request.env._("Some required fields are empty."))
+        return invalid_fields, missing_fields, error_messages
 
-        if not valid:
-            error["iban"] = "error"
-            error_message.append(_("The IBAN account number is not valid."))
-        return error, error_message
-
-    @route(["/my/account"], type="http", auth="user", website=True)
-    def account(self, redirect=None, **post):
-        partner = request.env.user.partner_id
-
-        res = super().account(redirect, **post)
-        if not res.qcontext.get("error"):
-            partner_bank = request.env["res.partner.bank"]
-            iban = post.get("iban")
-            if iban:
-                if partner.bank_ids:
-                    bank_account = partner.bank_ids[0]
-                    bank_account.acc_number = iban
-                else:
-                    partner_bank.sudo().create(
-                        {"partner_id": partner.id, "acc_number": iban}
-                    )
-        return res
+    def _create_or_update_address(self, partner_sudo, *args, **form_data):
+        partner_sudo, feedback = super()._create_or_update_address(
+            partner_sudo, *args, **form_data
+        )
+        iban = form_data.get("iban")
+        if (
+            form_data.get("cooperator_details")
+            and iban
+            and partner_sudo
+            and not feedback.get("invalid_fields")
+        ):
+            if partner_sudo.bank_ids:
+                partner_sudo.bank_ids[0].acc_number = iban
+            else:
+                request.env["res.partner.bank"].sudo().create(
+                    {"partner_id": partner_sudo.id, "acc_number": iban}
+                )
+        return partner_sudo, feedback
 
     @route(
         "/my/deactivate_account",

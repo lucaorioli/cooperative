@@ -19,7 +19,7 @@ class CooperatorPortalDeactivateAccountCase(HttpCase):
                 "name": login,
                 "login": login,
                 "password": login,
-                "groups_id": [cls.env.ref("base.group_portal").id],
+                "group_ids": [cls.env.ref("base.group_portal").id],
             }
         )
 
