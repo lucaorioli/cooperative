@@ -29,7 +29,7 @@ class PaymentTransaction(models.Model):
         )
         if not accounts:
             return
-        if accounts[0].display_name not in self.provider_id.pending_msg:
+        if accounts[0].display_name not in (self.provider_id.pending_msg or ""):
             self.provider_id.pending_msg = None
             self.provider_id._transfer_ensure_pending_msg_is_set()
 

@@ -38,57 +38,64 @@ class WebsiteSubscriptionPayment(WebsiteSubscription):
         return request.render("cooperator_website_payment.payment", render_values)
 
     def _get_payment_values(self, capital_release_request, **kwargs):
-        # this is a copy of WebsiteSale._get_shop_payment_values() (from the
-        # website_sale module) with some changes.
+        # this follows PortalAccount._get_common_page_view_values() (from the
+        # account_payment module) with some changes.
         currency = capital_release_request.currency_id
+        company = capital_release_request.company_id
         user = request.env.user
         logged_in = not user._is_public()
-        partner = user.partner_id
+        # in sudo mode to read the fields of providers, payment methods,
+        # tokens and partner (if not logged in)
+        partner_sudo = (
+            user.partner_id if logged_in else capital_release_request.partner_id
+        )
         amount = capital_release_request.amount_total
-        # in sudo mode to read the fields of providers, capital_release_request
-        # and partner (if not logged in)
+        availability_report = {}
         providers_sudo = (
             request.env["payment.provider"]
             .sudo()
             ._get_compatible_providers(
-                capital_release_request.company_id.id,
-                partner.id,
+                company.id,
+                partner_sudo.id,
                 amount,
                 currency_id=currency.id,
                 website_id=request.website.id,
+                report=availability_report,
             )
         )
-        tokens = (
-            request.env["payment.token"].search(
-                [
-                    ("provider_id", "in", providers_sudo.ids),
-                    ("partner_id", "=", partner.id),
-                ]
+        payment_methods_sudo = (
+            request.env["payment.method"]
+            .sudo()
+            ._get_compatible_payment_methods(
+                providers_sudo.ids,
+                partner_sudo.id,
+                currency_id=currency.id,
+                report=availability_report,
             )
+        )
+        tokens_sudo = (
+            request.env["payment.token"]
+            .sudo()
+            ._get_available_tokens(providers_sudo.ids, partner_sudo.id)
             if logged_in
             else request.env["payment.token"]
         )
-        fees_by_provider = {
-            p_sudo: p_sudo._compute_fees(amount, currency, partner.country_id)
-            for p_sudo in providers_sudo.filtered("fees_active")
-        }
         return {
             "error": self._get_subscription_payment_error(capital_release_request),
-            "partner": partner,
-            "payment_action_id": request.env.ref("payment.action_payment_provider").id,
-            # payment form common (checkout and manage) values
-            "providers": providers_sudo,
-            "tokens": tokens,
-            "fees_by_provider": fees_by_provider,
-            "show_tokenize_input": PaymentPortal._compute_show_tokenize_input_mapping(
-                providers_sudo, logged_in=logged_in
-            ),
             "amount": amount,
             "currency": currency,
-            "partner_id": partner.id,
+            "partner_id": partner_sudo.id,
+            "providers_sudo": providers_sudo,
+            "payment_methods_sudo": payment_methods_sudo,
+            "tokens_sudo": tokens_sudo,
+            "availability_report": availability_report,
+            "show_tokenize_input_mapping": (
+                PaymentPortal._compute_show_tokenize_input_mapping(providers_sudo)
+            ),
             "access_token": capital_release_request._portal_ensure_token(),
             "transaction_route": f"/invoice/transaction/{capital_release_request.id}",
             "landing_route": self.VALIDATION_ROUTE,
+            "payment_reference": capital_release_request.payment_reference,
         }
 
     def _get_subscription_payment_error(self, capital_release_request):

@@ -13,9 +13,9 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
     def test_show_payment_page(self):
         result = self._submit_subscription_form()
         # should redirect to payment page
-        self.assertRegex(result.text, "<h2.*?>Please select a payment method</h2>")
+        self.assertHtmlRegex(result.text, "<h2.*?>Please select a payment method</h2>")
         # should display the amount
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             r"<p.*?>Subscription amount: "
             r'<strong data-oe-type="monetary" data-oe-expression="amount">'
@@ -38,7 +38,7 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         self.assertEqual(tx_sudo.partner_id, partner)
         self.assertEqual(capital_release_request.partner_id, partner)
         tx_sudo._set_done()
-        tx_sudo._finalize_post_processing()
+        tx_sudo._post_process()
         self.assertEqual(capital_release_request.payment_state, "paid")
         self.assertTrue(partner.member)
         payment = tx_sudo.payment_id
@@ -58,22 +58,22 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
             f"Certificate {partner.cooperator_register_number}.html",
         )
         result = self.url_open(landing_route)
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             "<h1><span>Subscription</span> "
             f"<em>{capital_release_request.name}</em> "
             "<span>Confirmed</span></h1>",
         )
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             r"<h2>Thank you for your subscription\.</h2>\s*"
             "<p>A confirmation message with your cooperator certificate has "
             r"been sent to you by email \(to "
             r"<strong>email@example.net</strong>\)\.</p>",
         )
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
-            r"<p>Your payment has been successfully processed\. Thank you!</p>",
+            r"<p>Your payment has been successfully processed\.</p>",
         )
 
     def test_failed_direct_payment(self):
@@ -85,21 +85,21 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         ) = self._submit_form_and_create_transaction()
         partner = capital_release_request.subscription_request.partner_id
         tx_sudo._set_error("dummy error")
-        # it is not paid, because tx_sudo._finalize_post_processing() is only
+        # it is not paid, because tx_sudo._post_process() is only
         # called when the transaction is done. unfortunately, this cannot be
         # tested here.
         self.assertEqual(capital_release_request.payment_state, "not_paid")
         self.assertFalse(partner.member)
         result = self.url_open(landing_route)
         # should redirect to payment page with an error message
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             r'<div class="alert alert-danger">\s*'
             r"<strong>The payment operation has failed:</strong>\s*"
             r"<p>dummy error</p>\s*Please try again.\s*</div>",
         )
-        self.assertRegex(result.text, "<h2.*?>Please select a payment method</h2>")
-        self.assertRegex(
+        self.assertHtmlRegex(result.text, "<h2.*?>Please select a payment method</h2>")
+        self.assertHtmlRegex(
             result.text,
             r"<p.*?>Subscription amount: "
             r'<strong data-oe-type="monetary" data-oe-expression="amount">'
@@ -118,21 +118,21 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         ) = self._submit_form_and_create_transaction()
         partner = capital_release_request.subscription_request.partner_id
         tx_sudo._set_canceled()
-        # it is not paid, because tx_sudo._finalize_post_processing() is only
+        # it is not paid, because tx_sudo._post_process() is only
         # called when the transaction is done. unfortunately, this cannot be
         # tested here.
         self.assertEqual(capital_release_request.payment_state, "not_paid")
         self.assertFalse(partner.member)
         result = self.url_open(landing_route)
         # should redirect to payment page with an error message
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             r'<div class="alert alert-danger">\s*'
             r"<strong>The payment operation has failed:</strong>\s*"
             r"<p>Your payment has been cancelled.</p>\s*Please try again.\s*</div>",
         )
-        self.assertRegex(result.text, "<h2.*?>Please select a payment method</h2>")
-        self.assertRegex(
+        self.assertHtmlRegex(result.text, "<h2.*?>Please select a payment method</h2>")
+        self.assertHtmlRegex(
             result.text,
             r"<p.*?>Subscription amount: "
             r'<strong data-oe-type="monetary" data-oe-expression="amount">'
@@ -153,7 +153,7 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         tx_sudo._set_error("dummy error")
         result = self.url_open(landing_route)
         # should redirect to payment page with an error message
-        self.assertRegex(result.text, "<h2.*?>Please select a payment method</h2>")
+        self.assertHtmlRegex(result.text, "<h2.*?>Please select a payment method</h2>")
         (
             capital_release_request_2,
             landing_route,
@@ -164,11 +164,11 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         # should create a new transaction
         self.assertNotEqual(tx_sudo_2, tx_sudo)
         tx_sudo._set_done()
-        tx_sudo._finalize_post_processing()
+        tx_sudo._post_process()
         self.assertEqual(capital_release_request.payment_state, "paid")
         self.assertTrue(partner.member)
         result = self.url_open(landing_route)
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             "<h1><span>Subscription</span> "
             f"<em>{capital_release_request.name}</em> "
@@ -195,13 +195,13 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         ) = self._submit_form_and_create_transaction()
         partner = capital_release_request.subscription_request.partner_id
         tx_sudo._set_done()
-        tx_sudo._finalize_post_processing()
+        tx_sudo._post_process()
         self.assertEqual(capital_release_request.payment_state, "paid")
         self.assertTrue(partner.member)
         # go back to payment page
         result = self.url_open("/subscription/payment")
         # should redirect to the confirmation page
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             "<h1><span>Subscription</span> "
             f"<em>{capital_release_request.name}</em> "

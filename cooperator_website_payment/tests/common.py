@@ -4,6 +4,8 @@
 
 import re
 
+from lxml import html
+
 from odoo.tools import mute_logger
 
 from odoo.addons.account_payment.tests.common import AccountPaymentCommon
@@ -17,9 +19,13 @@ class CooperatorWebsitePaymentCommon(
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.groups_id |= cls.env.ref("cooperator.cooperator_group_manager")
         cls.set_up_cooperator_test_data()
         # associate website with test company
         cls.env.ref("website.default_website").company_id = cls.env.company
+        website = cls.env.ref("website.default_website")
+        if "recaptcha_v2_enabled" in website._fields:
+            website.recaptcha_v2_enabled = False
 
     def _submit_subscription_form(self):
         # open subscription form
@@ -56,34 +62,25 @@ class CooperatorWebsitePaymentCommon(
         return self.url_open(url, data=form_data)
 
     def _get_transaction_route_params_from_payment_page(self, text):
-        csrf_token = re.search(r'csrf_token: "(\w+?)"', text).group(1)
-        match = re.search(
-            r'<form name="o_payment_checkout" class=".*?" '
-            r'data-amount="(?P<amount>.+?)" '
-            r'data-currency-id="(?P<currency_id>.+?)" '
-            r'data-partner-id="(?P<partner_id>.+?)" '
-            r'data-access-token="(?P<access_token>.+?)" '
-            r'data-transaction-route="(?P<transaction_route>.+?)" '
-            r'data-landing-route="(?P<landing_route>.+?)" '
-            r'data-allow-token-selection="(?P<allow_token_selection>.+?)">',
-            text,
-        )
-        return match.group("transaction_route"), {
-            "payment_option_id": None,
-            "reference_prefix": None,
-            "amount": float(match.group("amount")),
-            "currency_id": int(match.group("currency_id")),
-            "partner_id": int(match.group("partner_id")),
+        form = html.fromstring(text).get_element_by_id("o_payment_form")
+        return form.get("data-transaction-route"), {
+            "provider_id": None,
+            "payment_method_id": None,
+            "token_id": None,
+            "amount": float(form.get("data-amount")),
             "flow": "direct",
             "tokenization_requested": False,
-            "landing_route": match.group("landing_route"),
-            "access_token": match.group("access_token"),
-            "csrf_token": csrf_token,
-            # this field is added by the account_payment module. it is not a
-            # problem that it is not set, as the transaction route already
-            # contains the invoice id.
-            "invoice_id": None,
+            "landing_route": form.get("data-landing-route"),
+            "access_token": form.get("data-access-token"),
         }
+
+    @staticmethod
+    def _squash_html(text):
+        """Collapse whitespace, also between tags, to compare html snippets."""
+        return re.sub(r">\s+<", "><", re.sub(r"\s+", " ", text))
+
+    def assertHtmlRegex(self, text, pattern):
+        self.assertRegex(self._squash_html(text), self._squash_html(pattern))
 
     def _get_invoice_id_from_invoice_transaction_route(self, route):
         return int(re.match(r"/invoice/transaction/(\d+)", route).group(1))
@@ -105,11 +102,16 @@ class CooperatorWebsitePaymentCommon(
             self.env["account.move"].sudo().browse(capital_release_request_id)
         )
         landing_route = params["landing_route"]
-        params["payment_option_id"] = self.provider.id
+        params["provider_id"] = self.provider.id
+        payment_methods = self.provider.payment_method_ids
+        params["payment_method_id"] = (
+            self.payment_method_id
+            if self.payment_method_id in payment_methods.ids
+            else payment_methods[:1].id
+        )
         url = self._build_url(route)
         with mute_logger("odoo.addons.payment.models.payment_transaction"):
-            result = self._make_json_rpc_request(url, params)
-        processing_values = result.json()["result"]
+            processing_values = self.make_jsonrpc_request(url, params)
         tx_sudo = self._get_tx(processing_values["reference"])
         return capital_release_request, landing_route, tx_sudo
 
