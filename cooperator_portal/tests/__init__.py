@@ -3,3 +3,4 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 from . import test_deactivate_account
+from . import test_portal

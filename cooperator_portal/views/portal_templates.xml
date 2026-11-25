@@ -83,7 +83,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </template>
 
     <!-- Add cooperator information -->
-    <template id="portal_layout" inherit_id="portal.portal_layout">
+    <template id="portal_layout" inherit_id="portal.side_content">
         <xpath expr="//div[hasclass('o_portal_my_details')]" position="after">
             <div class="o_portal_my_details_coop mt-3" t-if="coop_membership.member">
                 <h4>Cooperator Details</h4>
@@ -223,8 +223,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     >
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/account/static/src/img/Bill.svg'" />
                 <t t-set="title">Capital Release Requests</t>
                 <t t-set="url" t-value="'/my/capital_release_requests'" />
+                <t
+                    t-set="text"
+                >Follow, download or pay your capital release requests</t>
                 <t
                     t-set="placeholder_count"
                     t-value="'capital_release_request_count'"
