@@ -5,7 +5,7 @@
 {
     "name": "Cooperator Website Payment",
     "summary": "Enable direct online payment of cooperative shares",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Cooperative management",
     "website": "https://github.com/OCA/cooperative",
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",

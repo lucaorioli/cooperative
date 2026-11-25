@@ -71,9 +71,9 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
             r"been sent to you by email \(to "
             r"<strong>email@example.net</strong>\)\.</p>",
         )
-        self.assertHtmlRegex(
-            result.text,
-            r"<p>Your payment has been successfully processed\.</p>",
+        self.assertIn(
+            self._squash_html(str(tx_sudo.provider_id.done_msg)),
+            self._squash_html(result.text),
         )
 
     def test_failed_direct_payment(self):

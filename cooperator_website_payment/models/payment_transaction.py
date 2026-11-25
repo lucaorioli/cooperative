@@ -33,11 +33,11 @@ class PaymentTransaction(models.Model):
             self.provider_id.pending_msg = None
             self.provider_id._transfer_ensure_pending_msg_is_set()
 
-    def _process_notification_data(self, notification_data):
+    def _apply_updates(self, payment_data):
         if self._is_wire_transfer():
             for invoice in self.invoice_ids.filtered(
                 lambda inv: inv.release_capital_request
             ):
                 invoice.send_capital_release_request_mail()
             self._ensure_bank_account_number_in_pending_message()
-        return super()._process_notification_data(notification_data)
+        return super()._apply_updates(payment_data)

@@ -19,10 +19,13 @@ class CooperatorWebsitePaymentCommon(
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref("cooperator.cooperator_group_manager")
+        cls.env.user.group_ids |= cls.env.ref("cooperator.cooperator_group_manager")
         cls.set_up_cooperator_test_data()
         # associate website with test company
         cls.env.ref("website.default_website").company_id = cls.env.company
+        website = cls.env.ref("website.default_website")
+        if "recaptcha_v2_enabled" in website._fields:
+            website.recaptcha_v2_enabled = False
 
     def _submit_subscription_form(self):
         # open subscription form
