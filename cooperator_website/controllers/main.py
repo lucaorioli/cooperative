@@ -448,7 +448,7 @@ class WebsiteSubscription(http.Controller):
                 values[field_name] = field_value
             # allow to add some free fields or blacklisted field like ID
             elif field_name not in _TECHNICAL:
-                post_description.append("{}: {}".format(field_name, field_value))
+                post_description.append(f"{field_name}: {field_value}")
 
         logged = kwargs.get("logged") == "on"
         is_company = kwargs.get("is_company") == "on"
