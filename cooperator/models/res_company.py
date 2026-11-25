@@ -303,9 +303,7 @@ class ResCompany(models.Model):
                     )
 
     def _accounting_data_initialized(self):
-        return self.chart_template_id or self.env[
-            "account.chart.template"
-        ].existing_accounting(self)
+        return self.chart_template or self._existing_accounting()
 
     def _init_cooperator_data(self):
         """
@@ -347,12 +345,14 @@ class ResCompany(models.Model):
                 # same remark as in _init_cooperator_data()
                 continue
             if not company.property_cooperator_account:
-                company.property_cooperator_account = account_account_model.create(
-                    {
-                        "code": "416101",
-                        "name": "Cooperators",
-                        "account_type": "asset_receivable",
-                        "reconcile": True,
-                        "company_id": company.id,
-                    }
+                company.property_cooperator_account = (
+                    account_account_model.with_company(company).create(
+                        {
+                            "code": "416101",
+                            "name": "Cooperators",
+                            "account_type": "asset_receivable",
+                            "reconcile": True,
+                            "company_ids": [(6, 0, company.ids)],
+                        }
+                    )
                 )

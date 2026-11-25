@@ -64,7 +64,7 @@ class ResPartner(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         if self.member:
-            return "Cooperator Certificate - %s" % self.name
+            return f"Cooperator Certificate - {self.name}"
         else:
             return "unknown"
 

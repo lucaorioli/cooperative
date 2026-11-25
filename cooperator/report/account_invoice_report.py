@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.tools import SQL
 
 
 class AccountInvoiceReport(models.Model):
@@ -6,10 +7,10 @@ class AccountInvoiceReport(models.Model):
 
     release_capital_request = fields.Boolean(string="Release capital request")
 
-    def _select(self):
-        return (
-            super()._select()
-            + ", move.release_capital_request as release_capital_request"
+    def _select(self) -> SQL:
+        return SQL(
+            "%s, move.release_capital_request AS release_capital_request",
+            super()._select(),
         )
 
     @api.model

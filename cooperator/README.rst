@@ -413,6 +413,8 @@ Contributors
   - Carmen Bianca Bakker
   - hugues de keyzer
 
+- Luca Orioli <lucaorioli@gmail.com>
+
 Maintainers
 -----------
 

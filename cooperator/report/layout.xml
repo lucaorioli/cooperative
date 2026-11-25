@@ -13,20 +13,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         priority="100"
     >
         <!-- remove horizontal line above footer -->
-        <xpath
-            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
-            position="attributes"
-        >
-            <attribute name="style" />
+        <xpath expr="//div[hasclass('o_footer_content')]" position="attributes">
+            <attribute name="class" remove="border-top" separator=" " />
         </xpath>
         <!--
             display logos on the right side of the footer according to the
             company properties
         -->
-        <xpath
-            expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div"
-            position="replace"
-        >
+        <xpath expr="//div[hasclass('o_footer_content')]" position="replace">
             <t t-if="company.display_logo1 or company.display_logo2">
                 <div style="font-size: 0.8em;">
                     <div class="row">

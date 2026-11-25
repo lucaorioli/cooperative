@@ -7,3 +7,4 @@
   - Manuel Claeys Bouuaert
   - Carmen Bianca Bakker
   - hugues de keyzer
+- Luca Orioli \<<lucaorioli@gmail.com>\>
