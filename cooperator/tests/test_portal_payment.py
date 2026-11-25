@@ -21,7 +21,7 @@ class PortalPaymentCase(AccountPaymentCommon, PaymentHttpCommon, CooperatorTestM
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref("cooperator.cooperator_group_manager")
+        cls.env.user.group_ids |= cls.env.ref("cooperator.cooperator_group_manager")
         cls.set_up_cooperator_test_data()
 
     def test_portal_payment(self):

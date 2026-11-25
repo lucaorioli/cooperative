@@ -1174,6 +1174,38 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         self.assertFalse(invoice.invoice_line_ids.tax_ids)
         self.assertEqual(len(invoice.line_ids), 2)
 
+    def test_capital_release_request_excluded_from_invoice_report(self):
+        """
+        Test that capital release requests are excluded from the invoice
+        analysis and from the invoiced total of the cooperator.
+        """
+        self.validate_subscription_request_and_pay(self.subscription_request_1)
+        invoice = self.subscription_request_1.capital_release_request
+        self.assertFalse(
+            self.env["account.invoice.report"].search([("move_id", "=", invoice.id)])
+        )
+        self.assertEqual(self.subscription_request_1.partner_id.total_invoiced, 0)
+
+    def test_subscription_register_group_totals(self):
+        """
+        Test that grouped subscription register lines sum the total amount,
+        but not the share price nor the operation number.
+        """
+        self.validate_subscription_request_and_pay(self.subscription_request_1)
+        partner = self.subscription_request_1.partner_id
+        register_model = self.env["subscription.register"]
+        lines = register_model.search([("partner_id", "=", partner.id)])
+        [(total,)] = register_model._read_group(
+            [("partner_id", "=", partner.id)], [], ["total_amount_line:sum"]
+        )
+        self.assertEqual(total, sum(lines.mapped("total_amount_line")))
+        self.assertEqual(total, 75)
+        fields_info = register_model.fields_get(
+            ["share_unit_price", "register_number_operation"], ["aggregator"]
+        )
+        self.assertFalse(fields_info["share_unit_price"].get("aggregator"))
+        self.assertFalse(fields_info["register_number_operation"].get("aggregator"))
+
     def _get_last_register_id(self):
         return self.env["subscription.register"].search([], order="id desc", limit=1).id
 

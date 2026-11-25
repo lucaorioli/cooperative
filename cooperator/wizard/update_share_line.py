@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -22,11 +22,13 @@ class ShareLineUpdateInfo(models.TransientModel):
         return share_line.effective_date
 
     effective_date = fields.Date(
-        string="effective date", required=True, default=_get_effective_date
+        string="effective date",
+        required=True,
+        default=lambda self: self._get_effective_date(),
     )
     cooperator = fields.Many2one(related="share_line.partner_id", string="Cooperator")
     share_line = fields.Many2one(
-        "share.line", string="Share line", default=_get_share_line
+        "share.line", string="Share line", default=lambda self: self._get_share_line()
     )
 
     def update(self):
@@ -44,7 +46,7 @@ class ShareLineUpdateInfo(models.TransientModel):
         if sub_reg:
             if len(sub_reg) > 1:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Error the update return more than one"
                         " subscription register lines."
                     )

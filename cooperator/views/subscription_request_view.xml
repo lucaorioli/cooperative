@@ -266,7 +266,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     name="is_valid_iban"
                     domain="[('is_valid_iban', '=', False)]"
                 />
-                <group expand="0" name="group_by" string="Group By">
+                <group name="group_by">
                     <filter
                         name="request_type"
                         string="Request type"
@@ -352,7 +352,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <field name="partner_id" />
                 <field name="effective_date" />
                 <separator />
-                <group name="group_by" string="Group By">
+                <group name="group_by">
                     <filter
                         name="cooperator"
                         string="Cooperator"

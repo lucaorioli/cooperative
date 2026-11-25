@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -32,7 +32,7 @@ class PartnerCreateSubscription(models.TransientModel):
         products = self.env["product.product"].search(domain)
         if not products:
             raise UserError(
-                _("No default share product found for this type of partner.")
+                self.env._("No default share product found for this type of partner.")
             )
         return products[0]
 
@@ -110,20 +110,27 @@ class PartnerCreateSubscription(models.TransientModel):
                 sub_request.share_product.list_price * sub_request.share_qty
             )
 
-    is_company = fields.Boolean(string="Is company?", default=_get_is_company)
-    cooperator = fields.Many2one("res.partner", default=_get_partner)
-    register_number = fields.Char(
-        string="Register Company Number", default=_get_register_number
+    is_company = fields.Boolean(
+        string="Is company?", default=lambda self: self._get_is_company()
     )
-    email = fields.Char(required=True, default=_get_email)
+    cooperator = fields.Many2one(
+        "res.partner", default=lambda self: self._get_partner()
+    )
+    register_number = fields.Char(
+        string="Register Company Number",
+        default=lambda self: self._get_register_number(),
+    )
+    email = fields.Char(required=True, default=lambda self: self._get_email())
     bank_account = fields.Char(
-        string="Bank account", required=True, default=_get_bank_account
+        string="Bank account",
+        required=True,
+        default=lambda self: self._get_bank_account(),
     )
     share_product = fields.Many2one(
         "product.product",
         string="Share Type",
-        domain=_get_possible_share,
-        default=_default_product_id,
+        domain=lambda self: self._get_possible_share(),
+        default=lambda self: self._default_product_id(),
         required=True,
         check_company=True,
     )
@@ -139,14 +146,15 @@ class PartnerCreateSubscription(models.TransientModel):
     )
     representative_firstname = fields.Char(
         string="Representative first name",
-        default=_get_representative_firstname,
+        default=lambda self: self._get_representative_firstname(),
     )
     representative_lastname = fields.Char(
         string="Representative last name",
-        default=_get_representative_lastname,
+        default=lambda self: self._get_representative_lastname(),
     )
     representative_email = fields.Char(
-        string="Representative email", default=_get_representative_email
+        string="Representative email",
+        default=lambda self: self._get_representative_email(),
     )
     company_id = fields.Many2one(
         "res.company",
@@ -206,7 +214,7 @@ class PartnerCreateSubscription(models.TransientModel):
             if representative:
                 if len(representative) > 1:
                     raise UserError(
-                        _(
+                        self.env._(
                             "There is two different persons with "
                             "the same national register number. "
                             "Please proceed to a merge before to "
@@ -215,7 +223,7 @@ class PartnerCreateSubscription(models.TransientModel):
                     )
                 if representative.parent_id:
                     raise UserError(
-                        _(
+                        self.env._(
                             "A person can't be representative of "
                             "two different companies."
                         )

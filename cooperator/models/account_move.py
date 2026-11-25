@@ -23,7 +23,7 @@ class AccountMove(models.Model):
         self.ensure_one()
         if not self.release_capital_request:
             return super()._get_starting_sequence()
-        starting_sequence = "%s/%04d/000" % (self.journal_id.code, self.date.year)
+        starting_sequence = f"{self.journal_id.code}/{self.date.year:04d}/000"
         if self.journal_id.refund_sequence and self.move_type in (
             "out_refund",
             "in_refund",

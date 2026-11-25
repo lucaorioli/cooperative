@@ -85,7 +85,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     domain="[('type','=','convert')]"
                 />
                 <separator />
-                <group expand="0" name="group_by" string="Group By">
+                <group name="group_by">
                     <filter
                         name="entry_type"
                         string="Entry type"

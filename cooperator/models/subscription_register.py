@@ -16,20 +16,20 @@ class SubscriptionRegister(models.Model):
     _name = "subscription.register"
     _description = "Subscription register"
     _check_company_auto = True
-    _sql_constraints = [
-        (
-            "company_id_register_number_operation_key",
-            "unique (company_id, register_number_operation)",
-            "A register operation number must be unique (per company)",
-        ),
-    ]
+    _company_id_register_number_operation_key = models.Constraint(
+        "unique (company_id, register_number_operation)",
+        "A register operation number must be unique (per company)",
+    )
 
+    @api.depends("share_unit_price", "quantity")
     def _compute_total_line(self):
         for line in self:
             line.total_amount_line = line.share_unit_price * line.quantity
 
     name = fields.Char(string="Number Operation", required=True, readonly=True)
-    register_number_operation = fields.Integer(required=True, readonly=True)
+    register_number_operation = fields.Integer(
+        required=True, readonly=True, aggregator=False
+    )
     partner_id = fields.Many2one(
         "res.partner", string="Cooperator", required=True, readonly=True
     )
@@ -42,11 +42,13 @@ class SubscriptionRegister(models.Model):
         string="Share price",
         currency_field="company_currency_id",
         readonly=True,
+        aggregator=False,
     )
     total_amount_line = fields.Monetary(
         string="Total amount line",
         currency_field="company_currency_id",
         compute="_compute_total_line",
+        store=True,
     )
     share_product_id = fields.Many2one(
         "product.product",
@@ -112,37 +114,3 @@ class SubscriptionRegister(models.Model):
     )
 
     _order = "register_number_operation asc"
-
-    @api.model
-    def read_group(
-        self,
-        domain,
-        fields,
-        groupby,
-        offset=0,
-        limit=None,
-        orderby=False,
-        lazy=True,
-    ):
-        if "share_unit_price" in fields:
-            fields.remove("share_unit_price")
-        if "register_number_operation" in fields:
-            fields.remove("register_number_operation")
-        res = super().read_group(
-            domain,
-            fields,
-            groupby,
-            offset=offset,
-            limit=limit,
-            orderby=orderby,
-            lazy=lazy,
-        )
-        if "total_amount_line" in fields:
-            for line in res:
-                if "__domain" in line:
-                    lines = self.search(line["__domain"])
-                    inv_value = 0.0
-                    for line2 in lines:
-                        inv_value += line2.total_amount_line
-                    line["total_amount_line"] = inv_value
-        return res

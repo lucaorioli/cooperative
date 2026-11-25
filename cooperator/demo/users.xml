@@ -19,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="partner_id" ref="res_partner_user_cooperator_demo" />
         <field name="login">user-cooperator</field>
         <field name="password">demo</field>
-        <field name="groups_id" eval="[(4, ref('cooperator.cooperator_group_user'))]" />
+        <field name="group_ids" eval="[(4, ref('cooperator.cooperator_group_user'))]" />
     </record>
 
     <record id="res_partner_manager_cooperator_demo" model="res.partner">
@@ -37,7 +37,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="login">manager-cooperator</field>
         <field name="password">demo</field>
         <field
-            name="groups_id"
+            name="group_ids"
             eval="[(4, ref('cooperator.cooperator_group_manager'))]"
         />
     </record>

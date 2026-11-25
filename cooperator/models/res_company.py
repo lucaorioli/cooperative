@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class ResCompany(models.Model):
@@ -282,8 +282,8 @@ class ResCompany(models.Model):
     @api.model
     def _get_cooperator_sequence_map(self):
         return {
-            "cooperator.number": _("Cooperator number sequence"),
-            "register.operation": _("Cooperator register operation sequence"),
+            "cooperator.number": self.env._("Cooperator number sequence"),
+            "register.operation": self.env._("Cooperator register operation sequence"),
         }
 
     def _create_cooperator_sequences(self):
@@ -334,7 +334,9 @@ class ResCompany(models.Model):
         self._init_cooperator_demo_data()
 
     def _init_cooperator_demo_data(self):
-        if not self.env["ir.module.module"].search([("name", "=", "cooperator")]).demo:
+        if not self.env.ref(
+            "cooperator.res_partner_cooperator_1_demo", raise_if_not_found=False
+        ):
             # demo data must not be loaded, nothing to do
             return
         account_account_model = self.env["account.account"]

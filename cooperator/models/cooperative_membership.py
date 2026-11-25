@@ -14,23 +14,14 @@ class CooperativeMembership(models.Model):
     _name = "cooperative.membership"
     _description = "Cooperative Membership"
     _check_company_auto = True
-    _sql_constraints = [
-        (
-            "company_id_partner_id_key",
-            "unique (company_id, partner_id)",
-            "Only one cooperative membership record can exist per partner "
-            "(per company)",
-        ),
-        (
-            # "numbe" instead of "number" because the constraint name is
-            # appended to the table name and it must be 63 characters maximum.
-            # following the default postgresql naming by appending the column
-            # names and truncating before _key.
-            "company_id_cooperator_register_numbe_key",
-            "unique (company_id, cooperator_register_number)",
-            "A cooperator register number must be unique (per company)",
-        ),
-    ]
+    _company_id_partner_id_key = models.Constraint(
+        "unique (company_id, partner_id)",
+        "Only one cooperative membership record can exist per partner (per company)",
+    )
+    _company_id_cooperator_register_numbe_key = models.Constraint(
+        "unique (company_id, cooperator_register_number)",
+        "A cooperator register number must be unique (per company)",
+    )
     _order = "cooperator_register_number"
 
     @api.depends("partner_id.share_ids")
@@ -152,7 +143,7 @@ class CooperativeMembership(models.Model):
     )
     coop_candidate = fields.Boolean(
         string="Cooperator candidate",
-        compute=_compute_coop_candidate,
+        compute="_compute_coop_candidate",
         store=True,
     )
     old_member = fields.Boolean(
@@ -163,8 +154,8 @@ class CooperativeMembership(models.Model):
     share_ids = fields.One2many(
         "share.line",
         string="Share Lines",
-        compute=_compute_share_ids,
-        search=_search_share_ids,
+        compute="_compute_share_ids",
+        search="_search_share_ids",
     )
     cooperator_register_number = fields.Integer(
         string="Cooperator Number",
@@ -173,26 +164,26 @@ class CooperativeMembership(models.Model):
         aggregator=None,
     )
     number_of_share = fields.Integer(
-        compute=_compute_share_info,
+        compute="_compute_share_info",
         string="Number of share",
         store=True,
     )
     total_value = fields.Float(
-        compute=_compute_share_info,
+        compute="_compute_share_info",
         string="Total value of shares",
         store=True,
     )
     cooperator_type = fields.Selection(
         selection=_get_share_type,
-        compute=_compute_cooperator_type,
+        compute="_compute_cooperator_type",
         store=True,
     )
-    effective_date = fields.Date(compute=_compute_effective_date, store=True)
+    effective_date = fields.Date(compute="_compute_effective_date", store=True)
     subscription_request_ids = fields.One2many(
         "subscription.request",
         string="Subscription request",
-        compute=_compute_subscription_request_ids,
-        search=_search_subscription_request_ids,
+        compute="_compute_subscription_request_ids",
+        search="_search_subscription_request_ids",
     )
     data_policy_approved = fields.Boolean(string="Approved Data Policy")
     internal_rules_approved = fields.Boolean(string="Approved Internal Rules")

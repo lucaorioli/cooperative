@@ -5,7 +5,7 @@
 
 from collections import defaultdict
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 from . import share_type
@@ -33,9 +33,13 @@ def company_dependent_related_field(delegate, name, field_type, **kwargs):
             delegate_record = getattr(record, delegate)
             if not delegate_record:
                 raise ValidationError(
-                    _(
-                        "Cannot set {name} field on {record}: {delegate} is not set"
-                    ).format(name=name, record=record, delegate=delegate)
+                    self.env._(
+                        "Cannot set %(name)s field on %(record)s: "
+                        "%(delegate)s is not set",
+                        name=name,
+                        record=record,
+                        delegate=delegate,
+                    )
                 )
             setattr(delegate_record, name, getattr(record, name))
 
@@ -123,8 +127,8 @@ class ResPartner(models.Model):
     cooperative_membership_id = fields.Many2one(
         "cooperative.membership",
         "Cooperative Membership For Current Company",
-        compute=_compute_cooperative_membership_id,
-        search=_search_cooperative_membership_id,
+        compute="_compute_cooperative_membership_id",
+        search="_search_cooperative_membership_id",
     )
     cooperator = cooperative_membership_field(
         "cooperator",
@@ -186,8 +190,8 @@ class ResPartner(models.Model):
     representative = fields.Boolean(string="Legal Representative")
     representative_of_member_company = fields.Boolean(
         string="Legal Representative of Member Company",
-        compute=_compute_representative_of_member_company,
-        search=_search_representative_of_member_company,
+        compute="_compute_representative_of_member_company",
+        search="_search_representative_of_member_company",
     )
     # allows for representative to have their own address
     # see https://github.com/coopiteasy/vertical-cooperative/issues/350

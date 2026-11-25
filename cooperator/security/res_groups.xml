@@ -5,9 +5,14 @@ SPDX-FileCopyrightText: 2019 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
+    <record id="res_groups_privilege_cooperator" model="res.groups.privilege">
+        <field name="name">Cooperators</field>
+        <field name="category_id" ref="module_category_cooperator_management" />
+    </record>
+
     <record id="cooperator_group_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="module_category_cooperator_management" />
+        <field name="privilege_id" ref="res_groups_privilege_cooperator" />
         <field
             name="implied_ids"
             eval="[(6, 0, [ref('base.group_user'), ref('account.group_account_invoice')])]"
@@ -16,10 +21,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <record id="cooperator_group_manager" model="res.groups">
         <field name="name">Manager</field>
-        <field name="category_id" ref="module_category_cooperator_management" />
+        <field name="privilege_id" ref="res_groups_privilege_cooperator" />
         <field name="implied_ids" eval="[(4, ref('cooperator_group_user'))]" />
         <field
-            name="users"
+            name="user_ids"
             eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
         />
     </record>

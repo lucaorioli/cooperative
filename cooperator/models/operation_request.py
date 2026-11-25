@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -127,14 +127,14 @@ class OperationRequest(models.Model):
             if record.subscription_request:
                 if not record.subscription_request.is_operation:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The is_operation field of the subscription "
                             "request must be true"
                         )
                     )
                 if record.subscription_request.source != "operation":
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The source field of the subscription request "
                             "must be set to operation"
                         )
@@ -150,7 +150,9 @@ class OperationRequest(models.Model):
     def _constrain_effective_date(self):
         for obj in self:
             if obj.effective_date and obj.effective_date > fields.Date.today():
-                raise ValidationError(_("The effective date can not be in the future."))
+                raise ValidationError(
+                    self.env._("The effective date can not be in the future.")
+                )
 
     def approve_operation(self):
         for rec in self:
@@ -178,7 +180,7 @@ class OperationRequest(models.Model):
     def hand_share_over(self, partner, share_product_id, quantity):
         if not partner.member:
             raise ValidationError(
-                _(
+                self.env._(
                     "This operation can't be executed if the"
                     " cooperator is not an effective member"
                 )
@@ -213,7 +215,7 @@ class OperationRequest(models.Model):
             "transfer",
         ]:
             raise ValidationError(
-                _(
+                self.env._(
                     "The cooperator doesn't own this share"
                     " type. Please choose the appropriate"
                     " share type."
@@ -225,23 +227,31 @@ class OperationRequest(models.Model):
 
             if self.quantity > total_share_dic[self.share_product_id.id]:
                 raise ValidationError(
-                    _("The cooperator can't hand over more shares that he/she owns.")
+                    self.env._(
+                        "The cooperator can't hand over more shares that he/she owns."
+                    )
                 )
 
         if self.operation_type == "convert":
             if self.company_id.unmix_share_type:
                 if self.share_product_id.code == self.share_to_product_id.code:
                     raise ValidationError(
-                        _("You can't convert the share to the same share type.")
+                        self.env._(
+                            "You can't convert the share to the same share type."
+                        )
                     )
                 if self.subscription_amount != self.partner_id.total_value:
                     raise ValidationError(
-                        _("You must convert all the shares to the selected type.")
+                        self.env._(
+                            "You must convert all the shares to the selected type."
+                        )
                     )
             else:
                 if self.subscription_amount != self.partner_id.total_value:
                     raise ValidationError(
-                        _("Converting just part of the shares is not yet implemented")
+                        self.env._(
+                            "Converting just part of the shares is not yet implemented"
+                        )
                     )
         elif self.operation_type == "transfer":
             if (
@@ -254,21 +264,21 @@ class OperationRequest(models.Model):
                 )
             ):
                 raise ValidationError(
-                    _(
-                        "This share type could not be"
-                        " transfered to " + self.partner_id_to.name
+                    self.env._(
+                        "This share type could not be transfered to %s",
+                        self.partner_id_to.name,
                     )
                 )
             if self.partner_id_to.is_company and not self.share_product_id.by_company:
                 raise ValidationError(
-                    _("This share can not be subscribed by a company")
+                    self.env._("This share can not be subscribed by a company")
                 )
             if (
                 not self.partner_id_to.is_company
                 and not self.share_product_id.by_individual
             ):
                 raise ValidationError(
-                    _("This share can not be subscribed an individual")
+                    self.env._("This share can not be subscribed an individual")
                 )
             if (
                 self.receiver_not_member
@@ -276,7 +286,7 @@ class OperationRequest(models.Model):
                 and not self.subscription_request.is_valid_iban
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The information of the receiver"
                         " are not correct. Please correct"
                         " the information before"
@@ -339,7 +349,7 @@ class OperationRequest(models.Model):
 
         if self.state != "approved":
             raise ValidationError(
-                _("This operation must be approved before to be executed")
+                self.env._("This operation must be approved before to be executed")
             )
 
         values = self.get_subscription_register_vals(self.effective_date)
@@ -368,7 +378,9 @@ class OperationRequest(models.Model):
                 values["quantity_to"] = convert_quant
             else:
                 raise ValidationError(
-                    _("Converting just part of the shares is not yet implemented")
+                    self.env._(
+                        "Converting just part of the shares is not yet implemented"
+                    )
                 )
         elif self.operation_type == "transfer":
             if self.receiver_not_member:
@@ -399,7 +411,7 @@ class OperationRequest(models.Model):
             )
             values["partner_id_to"] = self.partner_id_to.id
         else:
-            raise ValidationError(_("This operation is not yet implemented."))
+            raise ValidationError(self.env._("This operation is not yet implemented."))
 
         sub_reg_operation = self.company_id.get_next_register_operation_number()
         values["name"] = sub_reg_operation

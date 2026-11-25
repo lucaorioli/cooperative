@@ -13,22 +13,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         priority="100"
     >
         <!-- rename heading contents -->
-        <xpath
-            expr="//t[@t-set='layout_document_title']/span[@t-if=&quot;o.move_type == 'out_invoice' and o.state == 'posted'&quot;]"
-            position="replace"
-        >
-            <span
-                t-if="o.move_type == 'out_invoice' and o.state == 'posted'"
-            >Request to Release Capital</span>
+        <xpath expr="//t[@name='invoice_title']" position="replace">
+            <t name="invoice_title">Request to Release Capital</t>
         </xpath>
-        <!-- rename invoice date to request date -->
+        <!--
+            rename invoice date to request date. the whole block is replaced
+            because other modules (like account_debit_note) change its content.
+        -->
         <xpath
-            expr="//div[@id='informations']/div[@name='invoice_date']/t[@t-if=&quot;o.move_type == 'out_invoice'&quot;]"
+            expr="//div[@id='informations']/div[@name='invoice_date']"
             position="replace"
         >
-            <t t-if="o.move_type == 'out_invoice'">
+            <div class="col" t-if="o.invoice_date" name="invoice_date">
                 <strong>Request Date:</strong>
-            </t>
+                <div t-field="o.invoice_date" />
+            </div>
         </xpath>
         <!-- remove due date -->
         <xpath
@@ -82,7 +81,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         />
         <!-- add part type table cell -->
         <xpath
-            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[@name='account_invoice_line_name']"
+            expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']"
             position="after"
         >
             <td name="account_invoice_part_type">
@@ -94,7 +93,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </xpath>
         <!-- remove tax table cell -->
         <xpath
-            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[@name='td_taxes']"
+            expr="//table[@name='invoice_line_table']//td[@name='td_taxes']"
             position="replace"
         />
     </template>

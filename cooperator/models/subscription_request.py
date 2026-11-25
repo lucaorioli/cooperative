@@ -5,7 +5,7 @@
 
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from odoo.addons.base_iban.models.res_partner_bank import validate_iban
@@ -57,11 +57,13 @@ class SubscriptionRequest(models.Model):
         for request in self:
             if request.birthdate:
                 if request.birthdate > date.today():
-                    raise ValidationError(_("Date of birth cannot be in the future."))
+                    raise ValidationError(
+                        self.env._("Date of birth cannot be in the future.")
+                    )
                 min_date = date(1000, 1, 1)
                 if request.birthdate < min_date:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Please enter the full birth year with all digits "
                             "(e.g., 1990, not 90)."
                         )
@@ -72,20 +74,26 @@ class SubscriptionRequest(models.Model):
         for request in self:
             if request.is_company and not request.share_product_id.by_company:
                 raise ValidationError(
-                    _("%s is not available to companies")
-                    % request.share_product_id.name
+                    self.env._(
+                        "%s is not available to companies",
+                        request.share_product_id.name,
+                    )
                 )
             elif not request.is_company and not request.share_product_id.by_individual:
                 raise ValidationError(
-                    _("%s is not available to individuals")
-                    % request.share_product_id.name
+                    self.env._(
+                        "%s is not available to individuals",
+                        request.share_product_id.name,
+                    )
                 )
 
     @api.constrains("email", "company_email")
     def _check_company_and_representative_email_different(self):
         for record in self:
             if record.email == record.company_email:
-                raise ValidationError(_("Email and Company Email must be different."))
+                raise ValidationError(
+                    self.env._("Email and Company Email must be different.")
+                )
 
     def _send_confirmation_mail(self):
         if self.company_id.send_confirmation_email and not self.is_operation:
@@ -472,11 +480,12 @@ class SubscriptionRequest(models.Model):
         )
         if not account:
             raise UserError(
-                _(
+                self.env._(
                     "Please define income account for this product:"
-                    ' "{name}" (id: {id}) - or for its category: "{category}".'
-                ).format(
-                    name=product.name, id=product.id, category=product.categ_id.name
+                    ' "%(name)s" (id: %(id)s) - or for its category: "%(category)s".',
+                    name=product.name,
+                    id=product.id,
+                    category=product.categ_id.name,
                 )
             )
 
@@ -501,8 +510,8 @@ class SubscriptionRequest(models.Model):
         if not company.subscription_journal_id:
             company.subscription_journal_id = self.env["account.journal"].create(
                 {
-                    "name": _("Subscription Journal"),
-                    "code": _("SUBJ"),
+                    "name": self.env._("Subscription Journal"),
+                    "code": self.env._("SUBJ"),
                     "type": "sale",
                     "company_id": company.id,
                 }
@@ -516,7 +525,9 @@ class SubscriptionRequest(models.Model):
         if account:
             return account
         else:
-            raise UserError(_("You must set a cooperator account on your company."))
+            raise UserError(
+                self.env._("You must set a cooperator account on your company.")
+            )
 
     def get_invoice_vals(self, partner):
         invoice_vals = {
@@ -560,6 +571,7 @@ class SubscriptionRequest(models.Model):
         partner_vals = {
             "name": self.company_name,
             "is_company": self.is_company,
+            "company_type": "company" if self.is_company else "person",
             "company_register_number": self.company_register_number,
             "legal_form": self.company_type,
             "street": self.address,
@@ -689,7 +701,7 @@ class SubscriptionRequest(models.Model):
         domain = []
         if self.already_cooperator:
             raise UserError(
-                _(
+                self.env._(
                     "The checkbox already cooperator is"
                     " checked please select a cooperator."
                 )
@@ -734,7 +746,7 @@ class SubscriptionRequest(models.Model):
         else:
             if len(contact) > 1:
                 raise UserError(
-                    _(
+                    self.env._(
                         "There is two different persons with the"
                         " same national register number. Please"
                         " proceed to a merge before to continue"
@@ -742,7 +754,7 @@ class SubscriptionRequest(models.Model):
                 )
             if contact.parent_id and contact.parent_id != self.partner_id:
                 raise UserError(
-                    _(
+                    self.env._(
                         "This contact person is already defined"
                         " for another company. Please select"
                         " another contact"
@@ -781,11 +793,13 @@ class SubscriptionRequest(models.Model):
         self.ensure_one()
         if self.state not in ("draft", "waiting"):
             raise ValidationError(
-                _("The request must be in draft or on waiting list to be validated")
+                self.env._(
+                    "The request must be in draft or on waiting list to be validated"
+                )
             )
 
         if self.ordered_parts <= 0:
-            raise UserError(_("Number of share must be greater than 0."))
+            raise UserError(self.env._("Number of share must be greater than 0."))
 
         partner = self.setup_partner()
 
@@ -798,19 +812,21 @@ class SubscriptionRequest(models.Model):
     def block_subscription_request(self):
         self.ensure_one()
         if self.state != "draft":
-            raise ValidationError(_("Only draft requests can be blocked."))
+            raise ValidationError(self.env._("Only draft requests can be blocked."))
         self.write({"state": "blocked"})
 
     def unblock_subscription_request(self):
         self.ensure_one()
         if self.state != "blocked":
-            raise ValidationError(_("Only blocked requests can be unblocked."))
+            raise ValidationError(self.env._("Only blocked requests can be unblocked."))
         self.write({"state": "draft"})
 
     def cancel_subscription_request(self):
         self.ensure_one()
         if self.state not in ("draft", "waiting", "done", "blocked"):
-            raise ValidationError(_("You cannot cancel a request in this state."))
+            raise ValidationError(
+                self.env._("You cannot cancel a request in this state.")
+            )
         self.write({"state": "cancelled"})
 
     def _send_waiting_list_mail(self):
@@ -826,7 +842,7 @@ class SubscriptionRequest(models.Model):
         self.ensure_one()
         if self.state != "draft":
             raise ValidationError(
-                _("Only draft request can be put on the waiting list.")
+                self.env._("Only draft request can be put on the waiting list.")
             )
         self._send_waiting_list_mail()
         self.write({"state": "waiting"})

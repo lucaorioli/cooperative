@@ -86,7 +86,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         function is also called indirectly from the main xml data file).
     -->
     <function model="res.company" name="_init_cooperator_demo_data">
-        <value model="res.company" search="[]" />
+        <function model="res.company" name="search" eval="[[]]" />
     </function>
 
     <record id="product_template_share_type_1_demo" model="product.template">

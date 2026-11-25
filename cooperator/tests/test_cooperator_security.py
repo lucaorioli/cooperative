@@ -24,7 +24,7 @@ class TestCooperatorSecurity(TransactionCase, CooperatorTestMixin):
             }
         )
         cls.env.ref("cooperator.cooperator_group_manager").write(
-            {"users": [(4, cls.user_2.id)]}
+            {"user_ids": [(4, cls.user_2.id)]}
         )
 
     def test_user_without_access(self):
