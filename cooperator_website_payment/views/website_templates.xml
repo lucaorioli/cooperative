@@ -5,7 +5,6 @@ SPDX-FileCopyrightText: 2024 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template id="payment" name="Select Payment Method">
         <t t-call="website.layout">
             <div id="wrap" class="o_portal_wrap">
@@ -21,9 +20,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 class="mt-4 text-center"
                             >Please select a payment method</h2>
                             <p class="text-center">Subscription amount: <strong
-                                    t-out="amount"
-                                    t-options="{'widget': 'monetary', 'display_currency': currency}"
-                                /></p>
+                                t-out="amount"
+                                t-options="{'widget': 'monetary', 'display_currency': currency}"
+                            /></p>
                             <t t-call="payment.checkout" />
                         </div>
                     </div>
@@ -88,7 +87,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </div>
                 <t t-if="payment_tx_id.provider_code == 'custom'">
                     <div t-if="invoice.payment_reference" class="card-body">
-                        <b>Communication: </b><span t-esc='invoice.payment_reference' />
+                        <b>Communication: </b>
+                        <span t-esc='invoice.payment_reference' />
                     </div>
                     <div t-if="payment_tx_id.provider_id.sudo().qr_code">
                         <t
@@ -114,9 +114,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <t t-set="additional_title">Subscription - Confirmed</t>
             <div id="wrap">
                 <div class="container py-2">
-                    <h1><span>Subscription</span> <em t-field="invoice.name" /> <t
-                            t-if="invoice.payment_state == 'paid'"
-                        ><span>Confirmed</span></t></h1>
+                    <h1>
+                        <span>Subscription</span>
+                        <em t-field="invoice.name" />
+                        <t t-if="invoice.payment_state == 'paid'">
+                            <span>Confirmed</span>
+                        </t>
+                    </h1>
 
                     <div class="row">
                         <div class="col-12 col-xl">
@@ -130,8 +134,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         <h2>Thank you for your subscription.</h2>
                                         <p
                                         >A confirmation message with your cooperator certificate has been sent to you by email (to <strong
-                                                t-out="invoice.partner_id.email"
-                                            />).</p>
+                                            t-out="invoice.partner_id.email"
+                                        />).</p>
                                     </div>
                                 </t>
                                 <t
@@ -139,10 +143,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 >
                                     <p class="alert alert-info mt-3" role="status">
                                         <a
-                                            role="button"
-                                            t-att-href='invoice.partner_id.signup_prepare() and invoice.partner_id.with_context(relative_url=True).signup_url'
-                                            class='btn btn-primary'
-                                        >Sign Up</a>
+                                        role="button"
+                                        t-att-href='invoice.partner_id.signup_prepare() and invoice.partner_id.with_context(relative_url=True).signup_url'
+                                        class='btn btn-primary'
+                                    >Sign Up</a>
                                          to access your personal data.
                                     </p>
                                 </t>
@@ -187,5 +191,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </div>
         </t>
     </template>
-
 </odoo>

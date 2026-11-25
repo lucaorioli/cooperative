@@ -55,9 +55,7 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=partner.cooperator_register_number
-            ),
+            f"Certificate {partner.cooperator_register_number}.html",
         )
         result = self.url_open(landing_route)
         self.assertRegex(
@@ -186,9 +184,7 @@ class CooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         # should be .pdf but pdf generation is disabled in test mode.
         self.assertEqual(
             message.attachment_ids.name,
-            "Certificate {number}.html".format(
-                number=partner.cooperator_register_number
-            ),
+            f"Certificate {partner.cooperator_register_number}.html",
         )
 
     def test_reload_payment_page_after_successful_direct_payment(self):
