@@ -619,28 +619,29 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </t>
     </template>
 
-    <!--
-        this template inherits from the website.page record with xml id
-        website.contactus_thanks. the website.page model uses delegation
-        inheritance to ir.ui.view and the view gets an automatically generated
-        xml id with the "_ir_ui_view" suffix.
-    -->
-    <template
-        id="cooperator_thanks"
-        name="Thanks (Cooperator)"
-        inherit_id="website.contactus_thanks_ir_ui_view"
-        primary="True"
-        priority="100"
-    >
-        <xpath expr="/t[@t-name='website.contactus_thanks']" position="attributes">
-            <attribute name="name">Thanks (Cooperator)</attribute>
-        </xpath>
-        <xpath
-            expr="//div[@id='wrap']/section/div/div/div[1]/h5/span[2]"
-            position="replace"
-        >
-            <span>Your subscription has been <b>successfully</b> registered.</span>
-        </xpath>
+    <template id="cooperator_thanks" name="Thanks (Cooperator)">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <section class="s_text_block pt40 pb40">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 text-center">
+                                <i
+                                    class="fa fa-paper-plane fa-2x mb-3 rounded-circle text-bg-success"
+                                    role="presentation"
+                                />
+                                <h1 class="fw-bolder">Thank You!</h1>
+                                <p class="lead">
+                                    <span>Your subscription has been <b
+                                    >successfully</b> registered.</span>
+                                </p>
+                                <a href="/">Go to Homepage</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
     </template>
 
     <record id="menu_becomecooperator" model="website.menu">
