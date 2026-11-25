@@ -1,0 +1,2 @@
+- [Coop IT Easy SC](https://github.com/OCA/cooperative):
+  - hugues de keyzer

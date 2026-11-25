@@ -73,10 +73,8 @@ class TestCooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         self.assertEqual(message.recipient_ids, partner)
         self.assertEqual(
             message.subject,
-            "{company} Capital Release Request (Ref {reference})".format(
-                company=self.env.company.name,
-                reference=capital_release_request.name,
-            ),
+            f"{self.env.company.name} Capital Release Request "
+            f"(Ref {capital_release_request.name})",
         )
         self.assertIn("Hello first name,", message.body_html)
         self.assertEqual(len(message.attachment_ids), 1)
