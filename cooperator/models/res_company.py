@@ -200,12 +200,18 @@ class ResCompany(models.Model):
     @api.model
     def _get_cooperator_mail_template_fields(self):
         return {
-            "cooperator_confirmation_mail_template": "cooperator.email_template_confirmation",
+            "cooperator_confirmation_mail_template": (
+                "cooperator.email_template_confirmation"
+            ),
             "cooperator_capital_release_mail_template": (
                 "cooperator.email_template_release_capital"
             ),
-            "cooperator_waiting_list_mail_template": "cooperator.email_template_waiting_list",
-            "cooperator_certificate_mail_template": "cooperator.email_template_certificate",
+            "cooperator_waiting_list_mail_template": (
+                "cooperator.email_template_waiting_list"
+            ),
+            "cooperator_certificate_mail_template": (
+                "cooperator.email_template_certificate"
+            ),
             "cooperator_certificate_increase_mail_template": (
                 "cooperator.email_template_share_increase"
             ),
@@ -215,7 +221,9 @@ class ResCompany(models.Model):
             "cooperator_share_update_no_shares_mail_template": (
                 "cooperator.email_template_share_update_no_shares"
             ),
-            "cooperator_share_update_mail_template": "cooperator.email_template_share_update",
+            "cooperator_share_update_mail_template": (
+                "cooperator.email_template_share_update"
+            ),
         }
 
     def _get_cooperator_template(self, name):

@@ -129,7 +129,9 @@ class CooperatorTestMixin:
                         0,
                         {
                             "name": invoice.payment_reference,
-                            "account_id": invoice.company_id.property_cooperator_account.id,
+                            "account_id": (
+                                invoice.company_id.property_cooperator_account.id
+                            ),
                             "credit": amount,
                         },
                     ),
