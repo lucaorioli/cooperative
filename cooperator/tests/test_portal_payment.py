@@ -38,8 +38,7 @@ class PortalPaymentCase(AccountPaymentCommon, PaymentHttpCommon, CooperatorTestM
             "flow": "direct",
             "tokenization_requested": False,
             "landing_route": (
-                f"/my/capital_release_requests/{invoice.id}"
-                f"?access_token={access_token}"
+                f"/my/capital_release_requests/{invoice.id}?access_token={access_token}"
             ),
             "access_token": access_token,
         }

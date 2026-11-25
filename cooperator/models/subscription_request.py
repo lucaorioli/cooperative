@@ -397,8 +397,8 @@ class SubscriptionRequest(models.Model):
         string="Capital release request",
     )
     capital_release_request_date = fields.Date(
-        string="Force the capital " "release request date",
-        help="Keep empty to use the " "current date",
+        string="Force the capital release request date",
+        help="Keep empty to use the current date",
         copy=False,
     )
     # todo : check all these sources are used
@@ -810,7 +810,7 @@ class SubscriptionRequest(models.Model):
     def cancel_subscription_request(self):
         self.ensure_one()
         if self.state not in ("draft", "waiting", "done", "blocked"):
-            raise ValidationError(_("You cannot cancel a request in this " "state."))
+            raise ValidationError(_("You cannot cancel a request in this state."))
         self.write({"state": "cancelled"})
 
     def _send_waiting_list_mail(self):

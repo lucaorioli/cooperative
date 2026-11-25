@@ -65,8 +65,7 @@ class ResCompany(models.Model):
     bottom_logo2 = fields.Binary(string="Bottom logo 2")
     logo_url = fields.Char(string="logo url", compute="_compute_base_logo")
     display_data_policy_approval = fields.Boolean(
-        help="Choose to display a data policy checkbox on the cooperator"
-        " website form."
+        help="Choose to display a data policy checkbox on the cooperator website form."
     )
     data_policy_approval_required = fields.Boolean(
         string="Is data policy approval required?"
@@ -98,8 +97,7 @@ class ResCompany(models.Model):
         help="Text to display aside the checkbox to approve financial risk.",
     )
     display_generic_rules_approval = fields.Boolean(
-        help="Choose to display generic rules checkbox on the"
-        " cooperator website form."
+        help="Choose to display generic rules checkbox on the cooperator website form."
     )
     generic_rules_approval_required = fields.Boolean(
         string="Is generic rules approval required?"
