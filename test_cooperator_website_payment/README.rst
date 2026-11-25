@@ -63,6 +63,8 @@ Contributors
 
   - hugues de keyzer
 
+- Luca Orioli <lucaorioli@gmail.com>
+
 Maintainers
 -----------
 

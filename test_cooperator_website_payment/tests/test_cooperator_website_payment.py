@@ -31,7 +31,8 @@ class TestCooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
 
     def test_wire_transfer_payment(self):
         self._setup_company_bank_account()
-        self.provider = self._prepare_provider(provider_code="custom")
+        self.provider = self._prepare_provider(code="custom")
+        self.provider.is_published = True
         self.assertEqual(self.provider.custom_mode, "wire_transfer")
         last_mail_id = self._get_last_mail_id()
         (
@@ -46,23 +47,23 @@ class TestCooperatorWebsitePaymentCase(CooperatorWebsitePaymentCommon):
         self.assertEqual(capital_release_request.payment_state, "not_paid")
         self.assertFalse(partner.member)
         result = self.url_open("/subscription/payment/validate")
-        self.assertRegex(result.text, "Wire Transfer")
-        self.assertRegex(result.text, "Total:")
-        self.assertRegex(
+        self.assertHtmlRegex(result.text, "Wire Transfer")
+        self.assertHtmlRegex(result.text, "Total:")
+        self.assertHtmlRegex(
             result.text,
             r'<strong>\$ <span class="oe_currency_value">50\.00</span></strong>',
         )
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             "<h1><span>Subscription</span> "
             f"<em>{capital_release_request.name}</em> </h1>",
         )
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
-            "Please use the following transfer details</h3>"
-            "<h4>Bank Account</h4><ul><li>BE91 5230 0000 0176</li></ul>",
+            "Please use the following transfer details</h5>.*?"
+            "<h6>Bank Account</h6><ul><li><pre>BE91 5230 0000 0176</pre></li></ul>",
         )
-        self.assertRegex(
+        self.assertHtmlRegex(
             result.text,
             "<b>Communication: </b>"
             f"<span>{capital_release_request.payment_reference}</span>",
