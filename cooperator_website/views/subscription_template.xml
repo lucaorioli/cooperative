@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-
     <template id="contact_template" name="contact_template">
         <div class="row">
             <div class="col-md-6">
@@ -409,10 +408,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             >
                                 <label>
                                     <input
-                                        type="checkbox"
-                                        t-att-checked="logged"
-                                        name="logged"
-                                    />
+                                    type="checkbox"
+                                    t-att-checked="logged"
+                                    name="logged"
+                                />
                                     Logged
                                 </label>
                             </div>
@@ -423,10 +422,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             >
                                 <label>
                                     <input
-                                        type="checkbox"
-                                        t-att-checked="already_cooperator"
-                                        name="already_cooperator"
-                                    />
+                                    type="checkbox"
+                                    t-att-checked="already_cooperator"
+                                    name="already_cooperator"
+                                />
                                     Are you already a cooperator?
                                 </label>
                             </div>
@@ -494,11 +493,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <div class="mb-3" style="display: none;" name="is_company_container">
                     <label>
                         <input
-                            type="checkbox"
-                            t-att-value="is_company"
-                            checked="checked"
-                            name="is_company"
-                        />
+                        type="checkbox"
+                        t-att-value="is_company"
+                        checked="checked"
+                        name="is_company"
+                    />
                         Is a company?
                     </label>
                 </div>
@@ -650,5 +649,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <field name="parent_id" ref="website.main_menu" />
         <field name="sequence" type="int">65</field>
     </record>
-
 </odoo>
