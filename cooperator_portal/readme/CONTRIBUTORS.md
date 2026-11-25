@@ -1,1 +1,2 @@
 - Coop IT Easy SC
+- Luca Orioli \<<lucaorioli@gmail.com>\>

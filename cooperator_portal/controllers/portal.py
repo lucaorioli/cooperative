@@ -13,21 +13,13 @@ from odoo.addons.account.controllers.portal import PortalAccount, portal_pager
 
 
 class CooperatorPortal(PortalAccount):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Class scope is accessible throughout the server even on
-        # odoo instances that do not install this module.
-
-        # Therefore : bring back to instance scope if not already
-        #  if "MANDATORY_BILLING_FIELDS" in vars(self):
-        if "MANDATORY_BILLING_FIELDS" not in vars(self):
-            self.MANDATORY_BILLING_FIELDS = (
-                PortalAccount.MANDATORY_BILLING_FIELDS.copy()
-            )
-
-        self.MANDATORY_BILLING_FIELDS.extend(
-            ["iban", "birthdate_date", "gender", "lang"]
-        )
+    def _get_mandatory_fields(self):
+        return super()._get_mandatory_fields() + [
+            "iban",
+            "birthdate_date",
+            "gender",
+            "lang",
+        ]
 
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
@@ -68,9 +60,7 @@ class CooperatorPortal(PortalAccount):
                 request.env["account.move"].search_count(
                     self._get_capital_release_requests_domain()
                 )
-                if request.env["account.move"].check_access_rights(
-                    "read", raise_exception=False
-                )
+                if request.env["account.move"].has_access("read")
                 else 0
             )
             values["capital_release_request_count"] = capital_release_request_count
@@ -87,7 +77,7 @@ class CooperatorPortal(PortalAccount):
             document, access_token, values, session_history, no_breadcrumbs, **kwargs
         )
 
-    def _get_invoices_domain(self):
+    def _get_invoices_domain(self, m_type=None):
         # this is an override. by default, capital release requests are
         # excluded from invoices. this allows to avoid to override
         # _prepare_my_invoices_values() and the handling of invoices in
@@ -97,7 +87,7 @@ class CooperatorPortal(PortalAccount):
         capital_release_request = request.context.get("capital_release_requests", False)
         return expression.AND(
             [
-                super()._get_invoices_domain(),
+                super()._get_invoices_domain(m_type=m_type),
                 [("release_capital_request", "=", capital_release_request)],
             ]
         )
@@ -107,8 +97,10 @@ class CooperatorPortal(PortalAccount):
             [super()._get_invoices_domain(), [("release_capital_request", "=", True)]]
         )
 
-    def details_form_validate(self, data):
-        error, error_message = super().details_form_validate(data)
+    def details_form_validate(self, data, partner_creation=False):
+        error, error_message = super().details_form_validate(
+            data, partner_creation=partner_creation
+        )
         sub_req_model = request.env["subscription.request"]
         iban = data.get("iban")
         valid = sub_req_model.check_iban(iban)
@@ -147,7 +139,7 @@ class CooperatorPortal(PortalAccount):
         return Response(status=403)
 
     # this method is a copy of PortalAccount.portal_my_invoices() from the
-    # account module in odoo 16, with a few changes. please update accordingly
+    # account module in odoo 18, with a few changes. please update accordingly
     # when porting to newer versions.
     @route(
         [
@@ -179,7 +171,9 @@ class CooperatorPortal(PortalAccount):
 
         # content according to pager and archive selected
         invoices = values["invoices"](pager["offset"])
-        request.session["my_capital_release_requests_history"] = invoices.ids[:100]
+        request.session["my_capital_release_requests_history"] = [
+            invoice_data["invoice"].id for invoice_data in invoices
+        ][:100]
 
         values.update(
             {
@@ -208,7 +202,11 @@ class CooperatorPortal(PortalAccount):
         self, invoice_id, access_token=None, report_type=None, download=False, **kw
     ):
         return self.portal_my_invoice_detail(
-            invoice_id, access_token, report_type, download, **kw
+            invoice_id,
+            access_token=access_token,
+            report_type=report_type,
+            download=download,
+            **kw,
         )
 
     @route(
