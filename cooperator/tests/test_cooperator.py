@@ -4,16 +4,18 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 from datetime import date, datetime, timedelta
+from unittest.mock import patch
 
 from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tests.common import Form, TransactionCase, users
+from odoo.tests import Form, TransactionCase, tagged, users
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
 
+@tagged("-at_install", "post_install")
 class CooperatorCase(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):
@@ -66,12 +68,12 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
             {
                 "move_ids": [fields.Command.link(invoice.id)],
                 "reason": "test move reversal",
-                "refund_method": "refund",
                 "journal_id": invoice.journal_id.id,
             }
         )
-        action = reverse_wizard.reverse_moves()
+        action = reverse_wizard.refund_moves()
         reversed_move = self.env["account.move"].browse(action["res_id"])
+        reversed_move.action_post()
         self.assertEqual(
             reversed_move.name,
             f"RSUBJ/{date.today().year}/001",
@@ -1448,23 +1450,27 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         # localization modules.
         subscription_request_model = self.env["subscription.request"]
         res_partner_model = self.env["res.partner"]
+        dummy_selection = [("dummy_type", "Dummy Type")]
         subscription_request_company_type = subscription_request_model._fields[
             "company_type"
         ]
-        subscription_request_company_types = subscription_request_company_type.selection
-        subscription_request_company_type.selection = [("dummy_type", "Dummy Type")]
         res_partner_legal_form = res_partner_model._fields["legal_form"]
-        res_partner_legal_forms = res_partner_legal_form.selection
-        res_partner_legal_form.selection = [("dummy_type", "Dummy Type")]
         subscription_request_vals["company_type"] = "dummy_type"
-        subscription_request = subscription_request_model.create(
-            subscription_request_vals
-        )
-        self.validate_subscription_request_and_pay(subscription_request)
-        self.assertEqual(subscription_request.partner_id.legal_form, "dummy_type")
-        # restore previous values
-        subscription_request_company_type.selection = subscription_request_company_types
-        res_partner_legal_form.selection = res_partner_legal_forms
+        with (
+            patch.object(
+                subscription_request_company_type, "selection", dummy_selection
+            ),
+            patch.object(
+                subscription_request_company_type, "_selection", dict(dummy_selection)
+            ),
+            patch.object(res_partner_legal_form, "selection", dummy_selection),
+            patch.object(res_partner_legal_form, "_selection", dict(dummy_selection)),
+        ):
+            subscription_request = subscription_request_model.create(
+                subscription_request_vals
+            )
+            self.validate_subscription_request_and_pay(subscription_request)
+            self.assertEqual(subscription_request.partner_id.legal_form, "dummy_type")
 
     def test_cooperator_register_number_sequence_per_company(self):
         """

@@ -14,7 +14,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     >
         <!-- rename heading contents -->
         <xpath
-            expr="//div[hasclass('mt-5')]/div[hasclass('page')]/h2/span[@t-if=&quot;o.move_type == 'out_invoice' and o.state == 'posted'&quot;]"
+            expr="//t[@t-set='layout_document_title']/span[@t-if=&quot;o.move_type == 'out_invoice' and o.state == 'posted'&quot;]"
             position="replace"
         >
             <span
@@ -52,7 +52,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             expr="//div[@id='informations']/div[@name='reference']"
             position="replace"
         >
-            <div class="col-auto col-3 mw-100 mb-2" name="account_number">
+            <div class="col" name="account_number">
                 <strong>Account Number:</strong>
                 <t t-foreach="o.company_id.bank_journal_ids" t-as="journal">
                     <t t-set="b" t-value="journal.bank_account_id" />
@@ -61,7 +61,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     </t>
                 </t>
             </div>
-            <div class="col-auto col-3 mw-100 mb-2" name="contact">
+            <div class="col" name="contact">
                 <strong>Your Contact:</strong>
                 <p class="m-0" t-field="o.user_id" />
             </div>
@@ -94,7 +94,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </xpath>
         <!-- remove tax table cell -->
         <xpath
-            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[span[@id='line_tax_ids']]"
+            expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[@name='td_taxes']"
             position="replace"
         />
     </template>

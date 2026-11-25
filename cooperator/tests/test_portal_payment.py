@@ -21,6 +21,7 @@ class PortalPaymentCase(AccountPaymentCommon, PaymentHttpCommon, CooperatorTestM
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.groups_id |= cls.env.ref("cooperator.cooperator_group_manager")
         cls.set_up_cooperator_test_data()
 
     def test_portal_payment(self):
@@ -30,9 +31,10 @@ class PortalPaymentCase(AccountPaymentCommon, PaymentHttpCommon, CooperatorTestM
         route = f"/invoice/transaction/{invoice.id}"
         url = self._build_url(route)
         data = {
-            "payment_option_id": self.provider.id,
+            "provider_id": self.provider.id,
+            "payment_method_id": self.payment_method_id,
+            "token_id": None,
             "amount": 75,
-            "currency_id": invoice.currency_id.id,
             "flow": "direct",
             "tokenization_requested": False,
             "landing_route": (
@@ -42,12 +44,11 @@ class PortalPaymentCase(AccountPaymentCommon, PaymentHttpCommon, CooperatorTestM
             "access_token": access_token,
         }
         with mute_logger("odoo.addons.payment.models.payment_transaction"):
-            result = self._make_json_rpc_request(url, data)
-        processing_values = result.json()["result"]
+            processing_values = self.make_jsonrpc_request(url, data)
         tx_sudo = self._get_tx(processing_values["reference"])
         self.assertEqual(invoice.transaction_ids, tx_sudo)
         tx_sudo._set_done()
-        tx_sudo._finalize_post_processing()
+        tx_sudo._post_process()
         self.assertEqual(invoice.payment_state, "paid")
         partner = self.subscription_request_1.partner_id
         self.assertTrue(partner.member)

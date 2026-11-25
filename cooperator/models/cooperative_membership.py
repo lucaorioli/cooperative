@@ -170,7 +170,7 @@ class CooperativeMembership(models.Model):
         string="Cooperator Number",
         readonly=True,
         copy=False,
-        group_operator=None,
+        aggregator=None,
     )
     number_of_share = fields.Integer(
         compute=_compute_share_info,

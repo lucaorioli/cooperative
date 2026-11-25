@@ -5,11 +5,12 @@
 from freezegun import freeze_time
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests import TransactionCase, tagged
 
 from .cooperator_test_mixin import CooperatorTestMixin
 
 
+@tagged("-at_install", "post_install")
 class TestMailTemplates(TransactionCase, CooperatorTestMixin):
     @classmethod
     def setUpClass(cls):

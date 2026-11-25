@@ -37,10 +37,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </p>
             </div>
         </field>
-        <field name="report_template" ref="action_cooperator_invoices" />
         <field
-            name="report_name"
-        >{{ (object.name or "capital_release_request").replace("/", "_") }}{{ object.state == "draft" and "_draft" or "" }}</field>
+            name="report_template_ids"
+            eval="[(4, ref('action_cooperator_invoices'))]"
+        />
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True" />
         <field name="is_cooperator_template" eval="True" />
@@ -142,10 +142,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </p>
             </div>
         </field>
-        <field name="report_template" ref="action_cooperator_report_certificate" />
         <field
-            name="report_name"
-        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+            name="report_template_ids"
+            eval="[(4, ref('action_cooperator_report_certificate'))]"
+        />
         <field name="lang">{{ object.lang }}</field>
         <field name="auto_delete" eval="True" />
         <field name="is_cooperator_template" eval="True" />
@@ -181,10 +181,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </p>
             </div>
         </field>
-        <field name="report_template" ref="action_cooperator_report_certificate" />
         <field
-            name="report_name"
-        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+            name="report_template_ids"
+            eval="[(4, ref('action_cooperator_report_certificate'))]"
+        />
         <field name="lang">{{ object.lang }}</field>
         <field name="auto_delete" eval="True" />
         <field name="is_cooperator_template" eval="True" />
@@ -218,10 +218,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </p>
             </div>
         </field>
-        <field name="report_template" ref="action_cooperator_report_certificate" />
         <field
-            name="report_name"
-        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+            name="report_template_ids"
+            eval="[(4, ref('action_cooperator_report_certificate'))]"
+        />
         <field name="lang">{{ object.lang }}</field>
         <field name="auto_delete" eval="True" />
         <field name="is_cooperator_template" eval="True" />
@@ -255,10 +255,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </p>
             </div>
         </field>
-        <field name="report_template" ref="action_cooperator_report_certificate" />
         <field
-            name="report_name"
-        >Certificate {{ (object.cooperator_register_number or '') }}</field>
+            name="report_template_ids"
+            eval="[(4, ref('action_cooperator_report_certificate'))]"
+        />
         <field name="lang">{{ object.lang }}</field>
         <field name="auto_delete" eval="True" />
         <field name="is_cooperator_template" eval="True" />
