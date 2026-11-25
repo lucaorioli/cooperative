@@ -10,7 +10,6 @@ from urllib.parse import urljoin
 
 from odoo import http
 from odoo.http import request
-from odoo.tools.translate import _
 
 # Only use for behavior, don't stock it
 # Used to filter the session dict to keep only the form fields
@@ -297,7 +296,9 @@ class WebsiteSubscription(http.Controller):
         if error:
             values = self.fill_values(values, is_company, logged)
             values.update(kwargs)
-            values["error_msg"] = _("Some mandatory fields have not been filled.")
+            values["error_msg"] = request.env._(
+                "Some mandatory fields have not been filled."
+            )
             values = dict(values, error=error, kwargs=kwargs.items())
             return request.render(redirect, values)
 
@@ -306,7 +307,7 @@ class WebsiteSubscription(http.Controller):
             if user:
                 values = self.fill_values(values, is_company, logged)
                 values.update(kwargs)
-                values["error_msg"] = _(
+                values["error_msg"] = request.env._(
                     "An account already exists for this email address. "
                     "Please log in before filling in the form."
                 )
@@ -317,7 +318,7 @@ class WebsiteSubscription(http.Controller):
                 if email != confirm_email:
                     values = self.fill_values(values, is_company, logged)
                     values.update(kwargs)
-                    values["error_msg"] = _(
+                    values["error_msg"] = request.env._(
                         "Email and confirmation email addresses don't match."
                     )
                     values["error"] = {"email", "confirm_email"}
@@ -329,10 +330,12 @@ class WebsiteSubscription(http.Controller):
         # check the birthdate
         birthdate = date.fromisoformat(kwargs["birthdate"])
         if birthdate > date.today():
-            values["error_msg"] = _("Date of birth cannot be in the future.")
+            values["error_msg"] = request.env._(
+                "Date of birth cannot be in the future."
+            )
         min_date = date(1000, 1, 1)
         if birthdate < min_date:
-            values["error_msg"] = _(
+            values["error_msg"] = request.env._(
                 "Please enter the full birth year with all digits (e.g., 1990, not 90)."
             )
         if "error_msg" in values:
@@ -346,7 +349,9 @@ class WebsiteSubscription(http.Controller):
             if not post_file:
                 values = self.fill_values(values, is_company, logged)
                 values.update(kwargs)
-                values["error_msg"] = _("Please upload a scan of your ID card.")
+                values["error_msg"] = request.env._(
+                    "Please upload a scan of your ID card."
+                )
                 values["error"] = {"identity_card_scan"}
                 return request.render(redirect, values)
 
@@ -357,7 +362,7 @@ class WebsiteSubscription(http.Controller):
 
                 if not valid:
                     values = self.fill_values(values, is_company, logged)
-                    values["error_msg"] = _("Provided IBAN is not valid.")
+                    values["error_msg"] = request.env._("Provided IBAN is not valid.")
                     values["error"] = {"iban"}
                     return request.render(redirect, values)
 
@@ -367,9 +372,9 @@ class WebsiteSubscription(http.Controller):
         share_qty = int(kwargs.get("ordered_parts"))
         if share_qty < min_qty:
             values = self.fill_values(values, is_company, logged)
-            values["error_msg"] = _(
-                "Number of shares must be at least {min_qty}."
-            ).format(min_qty=min_qty)
+            values["error_msg"] = request.env._(
+                "Number of shares must be at least %(min_qty)s.", min_qty=min_qty
+            )
             return request.render(redirect, values)
 
         # check the subscription's amount
@@ -381,7 +386,7 @@ class WebsiteSubscription(http.Controller):
                 if company.unmix_share_type:
                     if partner.cooperator_type != share.default_code:
                         values = self.fill_values(values, is_company, logged)
-                        values["error_msg"] = _(
+                        values["error_msg"] = request.env._(
                             "You can't subscribe to two different types of share."
                         )
                         return request.render(redirect, values)
@@ -389,10 +394,12 @@ class WebsiteSubscription(http.Controller):
 
         if max_amount > 0 and total_amount > max_amount:
             values = self.fill_values(values, is_company, logged)
-            values["error_msg"] = _(
+            values["error_msg"] = request.env._(
                 "You can't subscribe for an amount that exceeds "
-                "{amount}{currency_symbol}."
-            ).format(amount=max_amount, currency_symbol=company.currency_id.symbol)
+                "%(amount)s%(currency_symbol)s.",
+                amount=max_amount,
+                currency_symbol=company.currency_id.symbol,
+            )
             return request.render(redirect, values)
 
         if not self._additional_validate(kwargs, logged, values, post_file):
@@ -408,7 +415,7 @@ class WebsiteSubscription(http.Controller):
 
     @http.route(
         ["/subscription/get_share_product"],
-        type="json",
+        type="jsonrpc",
         auth="public",
         methods=["POST"],
         website=True,

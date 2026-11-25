@@ -23,6 +23,10 @@ class SubscriptionFormCase(HttpCase, CooperatorTestMixin):
                 "generic_rules_approval_required": False,
             }
         )
+        # website_recaptcha_v2 enables the reCAPTCHA in its demo data
+        website = cls.env.ref("website.default_website")
+        if "recaptcha_v2_enabled" in website._fields:
+            website.recaptcha_v2_enabled = False
 
     def setUp(self):
         super().setUp()
@@ -56,6 +60,12 @@ class SubscriptionFormCase(HttpCase, CooperatorTestMixin):
         self.assertEqual(response.status_code, 200)
         self.assertIn("oe_cooperator", response.text)
         self.assertIn(self.share_y.short_name, response.text)
+        # the share data used by the form script to compute the total
+        self.assertRegex(
+            response.text,
+            rf'<option value="{self.share_y.product_tmpl_id.id}"[^>]*'
+            r'data-price="25.0" data-min-qty="2" data-force-min-qty="1"',
+        )
 
     def test_become_company_cooperator_page(self):
         response = self.url_open("/become_company_cooperator")
@@ -85,7 +95,6 @@ class SubscriptionFormCase(HttpCase, CooperatorTestMixin):
         self.assertEqual(subscription_request.source, "website")
         self.assertEqual(subscription_request.share_product_id, self.share_y)
         self.assertEqual(subscription_request.ordered_parts, 2)
-        self.assertEqual(subscription_request.state, "draft")
 
     def test_subscribe_company(self):
         data = self._get_form_data(

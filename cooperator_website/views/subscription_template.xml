@@ -311,6 +311,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <option
                                 t-att-value="product.id"
                                 t-att-selected="product.id == int(share_product_id)"
+                                t-att-data-price="product.list_price"
+                                t-att-data-min-qty="product.minimum_quantity"
+                                t-att-data-force-min-qty="'1' if product.force_min_qty else '0'"
                             >
                                 <t t-out="product.short_name" />
                             </option>

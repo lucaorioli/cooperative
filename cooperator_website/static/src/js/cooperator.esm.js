@@ -3,48 +3,48 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import publicWidget from "@web/legacy/js/public/public_widget";
-import {rpc} from "@web/core/network/rpc";
+import {Interaction} from "@web/public/interaction";
+import {registry} from "@web/core/registry";
 
-publicWidget.registry.CooperatorSubscriptionForm = publicWidget.Widget.extend({
-    selector: ".oe_cooperator",
-    events: {
-        "change #share_product_id": "_onChangeShareProduct",
-        "change #ordered_parts": "_onChangeOrderedParts",
-    },
+export class CooperatorSubscriptionForm extends Interaction {
+    static selector = ".oe_cooperator";
+    dynamicContent = {
+        "#share_product_id": {"t-on-change": this.onChangeShareProduct},
+        "#ordered_parts": {"t-on-change": this.onChangeOrderedParts},
+    };
 
-    start() {
+    setup() {
         this.sharePrice = 0;
         this.minQty = 0;
-        // Compute initial values.
-        this._onChangeShareProduct();
-        return this._super(...arguments);
-    },
+    }
 
-    async _onChangeShareProduct() {
-        const shareProductInput = this.el.querySelector("#share_product_id");
-        if (!shareProductInput || !shareProductInput.value) {
+    start() {
+        // Compute initial values.
+        this.onChangeShareProduct();
+    }
+
+    onChangeShareProduct() {
+        const option = this.el.querySelector("#share_product_id")?.selectedOptions[0];
+        const orderedParts = this.el.querySelector("#ordered_parts");
+        if (!option || !orderedParts) {
             return;
         }
-        const shareProductId = shareProductInput.value;
-        const data = await rpc("/subscription/get_share_product", {
-            share_product_id: shareProductId,
-        });
-        const shareProduct = data[shareProductId];
-        this.sharePrice = shareProduct.list_price;
-        const suggestedQty = shareProduct.min_qty;
-        this.minQty = shareProduct.force_min_qty ? suggestedQty : 1;
-        const orderedParts = this.el.querySelector("#ordered_parts");
+        this.sharePrice = Number(option.dataset.price) || 0;
+        const suggestedQty = Number(option.dataset.minQty) || 1;
+        this.minQty = option.dataset.forceMinQty === "1" ? suggestedQty : 1;
         orderedParts.setAttribute("min", this.minQty);
         if (Number(orderedParts.value) < suggestedQty) {
             orderedParts.value = suggestedQty;
         }
         // Update the share quantity and the total price.
-        this._onChangeOrderedParts();
-    },
+        this.onChangeOrderedParts();
+    }
 
-    _onChangeOrderedParts() {
+    onChangeOrderedParts() {
         const orderedParts = this.el.querySelector("#ordered_parts");
+        if (!orderedParts) {
+            return;
+        }
         let quantity = Number(orderedParts.value);
         if (quantity < this.minQty) {
             quantity = this.minQty;
@@ -54,7 +54,9 @@ publicWidget.registry.CooperatorSubscriptionForm = publicWidget.Widget.extend({
         if (totalParts) {
             totalParts.value = quantity * this.sharePrice;
         }
-    },
-});
+    }
+}
 
-export default publicWidget.registry.CooperatorSubscriptionForm;
+registry
+    .category("public.interactions")
+    .add("cooperator_website.subscription_form", CooperatorSubscriptionForm);
