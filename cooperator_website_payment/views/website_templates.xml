@@ -23,7 +23,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 t-out="amount"
                                 t-options="{'widget': 'monetary', 'display_currency': currency}"
                             /></p>
-                            <t t-call="payment.checkout" />
+                            <t t-call="payment.form" />
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                         <tr>
                                             <td colspan="2">
                                                 <t
-                                                    t-esc="payment_tx_id.provider_id.display_as or payment_tx_id.provider_id.name"
+                                                    t-out="payment_tx_id.payment_method_id.name or payment_tx_id.provider_id.name"
                                                 />
                                             </td>
                                             <td class="text-end" width="100">

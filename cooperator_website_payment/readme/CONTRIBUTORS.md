@@ -1,2 +1,3 @@
 - [Coop IT Easy SC](https://github.com/OCA/cooperative):
   - hugues de keyzer
+- Luca Orioli \<<lucaorioli@gmail.com>\>
