@@ -45,7 +45,6 @@
         "views/cooperative_membership_view.xml",
         "views/menus.xml",
         "report/reports.xml",
-        "report/layout.xml",
         "report/report_invoice.xml",
         "report/report_cooperator_certificate.xml",
         "report/report_subscription_register.xml",
