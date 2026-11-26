@@ -1,0 +1,708 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_it_cooperator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0-20261124\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 07:59+0000\n"
+"PO-Revision-Date: 2026-11-26 07:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/subscription_request.py:0
+msgid "%(code)s is not a valid Italian fiscal code."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "- Fiscal Code:"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "- Register of cooperative societies no."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_certificate_document
+msgid "<span>Fiscal code:</span>"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_certificate_document
+msgid ""
+"<span>is registered in the register of cooperative societies under "
+"number</span>"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_res_config_settings__l10n_it_share_capital_account_id
+msgid ""
+"Account of the share capital, set as the income account of the share "
+"category. Without it the shares are recorded on the default income account "
+"of the company."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Admission"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_admission_date
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_admission_date
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_admission_date
+msgid "Admission Date"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__agricultural_consortium
+msgid "Agricultural consortia"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__agricultural_contribution
+msgid "Agricultural products contribution cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__agricultural_work
+msgid "Agricultural work cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_association
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_association
+msgid "Association"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Category"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_product_product__l10n_it_share_category
+#: model:ir.model.fields,help:l10n_it_cooperator.field_product_template__l10n_it_share_category
+msgid ""
+"Category of the share in the members register: shares of the cooperator "
+"members, of the supporting members (soci sovventori) or instruments of the "
+"financing members (soci finanziatori)."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__company_type
+msgid "Company type"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_consortium
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_consortium
+msgid "Consortium"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__consumer
+msgid "Consumer cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_cooperative_membership
+msgid "Cooperative Membership"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__l10n_it_coop_register_category
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__l10n_it_coop_register_category
+msgid "Cooperative Register Category"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__l10n_it_coop_register_number
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__l10n_it_coop_register_number
+msgid "Cooperative Register Number"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__l10n_it_coop_register_section
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__l10n_it_coop_register_section
+msgid "Cooperative Register Section"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__consortium
+msgid "Cooperative consortia"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__credit
+msgid "Cooperative credit banks"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_coop
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_coop
+msgid "Cooperative society (Soc. coop.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_section__other
+msgid "Cooperatives other than with prevailing mutuality"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_section__prevailing
+msgid "Cooperatives with prevailing mutuality"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__product_template__l10n_it_share_category__cooperator
+msgid "Cooperator members' shares"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__country_code
+msgid "Country Code"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.cooperative_membership_view_search
+msgid "Current Members"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_cooperative_membership__l10n_it_admission_date
+msgid ""
+"Date of the first subscription or transfer of shares to the member in the "
+"subscription register."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_cooperative_membership__l10n_it_termination_date
+msgid ""
+"Date on which the member left the cooperative. Set when the member sells "
+"back or transfers all the shares."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_termination_reason__death
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_termination_reason__death
+msgid "Death"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_account_move__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_operation_request__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_product_template__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__display_name
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_encumbrances
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_encumbrances
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_encumbrances
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Encumbrances"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_termination_reason__exclusion
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_termination_reason__exclusion
+msgid "Exclusion"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__product_template__l10n_it_share_category__financing
+msgid "Financing members' instruments"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__l10n_it_codice_fiscale
+msgid "Fiscal Code"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Fiscal Code:"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__fishing
+msgid "Fishing cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.cooperative_membership_view_search
+msgid "Former Members"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_foundation
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_foundation
+msgid "Foundation"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_snc
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_snc
+msgid "General partnership (S.n.c.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__guarantee
+msgid "Guarantee and credit cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__housing
+msgid "Housing cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_account_move__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_operation_request__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_product_template__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__id
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid ""
+"Income account of the share category: the shares subscribed are recorded on "
+"it"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_subscription_request__l10n_it_codice_fiscale
+msgid ""
+"Italian fiscal code of the person or, for a company, of the company. "
+"Required for subscribers living in Italy."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Italy"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_spa
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_spa
+msgid "Joint-stock company (S.p.A.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__legal_form
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__legal_form
+msgid "Legal form"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_srl
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_srl
+msgid "Limited liability company (S.r.l.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_sas
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_sas
+msgid "Limited partnership (S.a.s.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Member"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_member_type
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_member_type
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_member_type
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_subscription_request__l10n_it_member_type
+msgid "Member Type"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_cooperative_membership__l10n_it_special_category
+msgid ""
+"Member admitted to the special category of art. 2527 of the civil code "
+"(training or integration), for at most five years."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Members Register"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_cooperative_membership__l10n_it_member_type
+msgid ""
+"Mutual relationship of the cooperator member with the cooperative. Volunteer"
+" members are allowed in social cooperatives only."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_subscription_request__l10n_it_member_type
+msgid ""
+"Mutual relationship of the new member with the cooperative, set on the "
+"membership when the request is validated."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "No."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid ""
+"Not set: the shares are recorded on the default income account of the "
+"company, if there is one, as revenue."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Number"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_operation_request
+msgid "Operation request"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Operations"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_termination_reason__other
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_termination_reason__other
+msgid "Other"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__other
+msgid "Other cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Paid Capital"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_sapa
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_sapa
+msgid "Partnership limited by shares (S.a.p.A.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_cooperative_membership__l10n_it_encumbrances
+msgid ""
+"Pledges, usufructs and other encumbrances on the shares of the member, shown"
+" in the members register."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Printed on"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__production_work
+msgid "Production and work cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_public
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_public
+msgid "Public body"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Register of cooperative societies"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid ""
+"Registration in the Italian register of cooperative societies (Albo delle "
+"società cooperative), shown on the cooperator certificate"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_res_company__l10n_it_coop_register_number
+#: model:ir.model.fields,help:l10n_it_cooperator.field_res_config_settings__l10n_it_coop_register_number
+msgid ""
+"Registration number in the Italian register of cooperative societies (Albo "
+"delle società cooperative)."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__retailer
+msgid "Retailer cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Section"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/cooperative_membership.py:0
+msgid "Set the end date of the special category of %s."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__l10n_it_share_capital_account_id
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Share Capital Account"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_product_product__l10n_it_share_category
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_product_template__l10n_it_share_category
+msgid "Share Category"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Shares Held"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_srls
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_srls
+msgid "Simplified limited liability company (S.r.l.s.)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid "Social Cooperative"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_company__l10n_it_social_coop_type
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_config_settings__l10n_it_social_coop_type
+msgid "Social Cooperative Type"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_coop_soc
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_coop_soc
+msgid "Social cooperative (Coop. sociale)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__social
+msgid "Social cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__legal_form__it_di
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__company_type__it_di
+msgid "Sole proprietorship (ditta individuale)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_special_category
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_special_category
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_special_category
+msgid "Special Category"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_special_category_end
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_special_category_end
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_special_category_end
+msgid "Special Category Until"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Special category until"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model,name:l10n_it_cooperator.model_subscription_request
+msgid "Subscription Request"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__product_template__l10n_it_share_category__supporter
+msgid "Supporting members' shares"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.report_cooperator_register
+msgid "Termination"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_termination_date
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_termination_date
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_termination_date
+msgid "Termination Date"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_cooperative_membership__l10n_it_termination_reason
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_partner__l10n_it_termination_reason
+#: model:ir.model.fields,field_description:l10n_it_cooperator.field_res_users__l10n_it_termination_reason
+msgid "Termination Reason"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_subscription_request__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/subscription_request.py:0
+msgid ""
+"The fiscal code is required for the subscribers living in Italy (%(name)s)."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/cooperative_membership.py:0
+msgid ""
+"The volunteer members cannot be more than half of the members "
+"(%(volunteers)s volunteers out of %(members)s members)."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/cooperative_membership.py:0
+msgid "Transfer from %(partner)s"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_termination_reason__transfer
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_termination_reason__transfer
+msgid "Transfer of all the shares"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/cooperative_membership.py:0
+msgid "Transfer to %(partner)s"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_coop_register_category__transport
+msgid "Transport cooperatives"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_social_coop_type__a
+msgid "Type A (social, health and educational services)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_social_coop_type__b
+msgid "Type B (work integration of disadvantaged people)"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields,help:l10n_it_cooperator.field_res_company__l10n_it_social_coop_type
+#: model:ir.model.fields,help:l10n_it_cooperator.field_res_config_settings__l10n_it_social_coop_type
+msgid ""
+"Type of social cooperative (law 381/1991). Volunteer members are allowed in "
+"social cooperatives only."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model_terms:ir.ui.view,arch_db:l10n_it_cooperator.res_config_settings_view_form
+msgid ""
+"Type of social cooperative (law 381/1991): volunteer members are allowed in "
+"social cooperatives only"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_company__l10n_it_social_coop_type__ab
+msgid "Types A and B"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_member_type__user
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_member_type__user
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__l10n_it_member_type__user
+msgid "User member"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_member_type__volunteer
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_member_type__volunteer
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__l10n_it_member_type__volunteer
+msgid "Volunteer member"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#. odoo-python
+#: code:addons/l10n_it_cooperator/models/cooperative_membership.py:0
+msgid ""
+"Volunteer members are allowed in social cooperatives only: set the type of "
+"social cooperative of %s."
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_termination_reason__withdrawal
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_termination_reason__withdrawal
+msgid "Withdrawal"
+msgstr ""
+
+#. module: l10n_it_cooperator
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__cooperative_membership__l10n_it_member_type__worker
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__res_partner__l10n_it_member_type__worker
+#: model:ir.model.fields.selection,name:l10n_it_cooperator.selection__subscription_request__l10n_it_member_type__worker
+msgid "Worker member"
+msgstr ""

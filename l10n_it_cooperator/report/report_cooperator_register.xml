@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- the members register has many columns: landscape -->
+    <record id="paperformat_members_register" model="report.paperformat">
+        <field name="name">A4 landscape (members register)</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="cooperator.action_report_cooperator_register" model="ir.actions.report">
+        <field name="paperformat_id" ref="paperformat_members_register" />
+    </record>
+
+    <!-- libro soci (art. 2421, 1st paragraph, no. 1 of the civil code) -->
+    <template
+        id="report_cooperator_register"
+        inherit_id="cooperator.report_cooperator_register"
+        priority="100"
+    >
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <!-- one register for each company, with its own header -->
+            <t t-foreach="docs.company_id or res_company" t-as="company">
+                <t
+                    t-set="members"
+                    t-value="docs.filtered(lambda m: m.company_id == company)"
+                />
+                <t t-call="web.external_layout">
+                    <div class="page" name="l10n_it_register">
+                        <h2>Members Register</h2>
+                        <p class="mt-3 mb-1">
+                            <strong t-out="company.name" />
+                            <t t-if="company.l10n_it_codice_fiscale">
+                                - Fiscal Code:
+                                <span t-out="company.l10n_it_codice_fiscale" />
+                            </t>
+                            <t t-if="company.l10n_it_coop_register_number">
+                                - Register of cooperative societies no.
+                                <span t-field="company.l10n_it_coop_register_number" />
+                            </t>
+                        </p>
+                        <p name="register_generation_date" class="mb-4">
+                            Printed on
+                            <span
+                            t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                        />
+                        </p>
+                        <t t-foreach="docs._l10n_it_share_categories()" t-as="category">
+                            <t
+                                t-set="rows"
+                                t-value="[(m, m._l10n_it_register_lines(category[0]), m._l10n_it_register_holding(category[0])) for m in members]"
+                            />
+                            <t
+                                t-set="rows"
+                                t-value="[row for row in rows if row[1] or row[2]['quantity']]"
+                            />
+                            <t t-if="rows">
+                                <h4 class="mt-4" t-out="category[1]" />
+                                <table
+                                    class="table table-sm o_main_table"
+                                    t-att-name="'register_%s' % category[0]"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th class="text-start">No.</th>
+                                            <th class="text-start">Member</th>
+                                            <th class="text-start">Admission</th>
+                                            <th class="text-start">Operations</th>
+                                            <th class="text-end">Shares Held</th>
+                                            <th class="text-end">Paid Capital</th>
+                                            <th class="text-start">Termination</th>
+                                            <th class="text-start">Encumbrances</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="rows" t-as="row">
+                                            <t t-set="membership" t-value="row[0]" />
+                                            <td name="cooperator_number">
+                                                <span
+                                                    t-field="membership.cooperator_register_number"
+                                                />
+                                            </td>
+                                            <td name="cooperator_name">
+                                                <strong
+                                                    t-field="membership.partner_id.name"
+                                                />
+                                                <div
+                                                    t-if="membership.partner_id.l10n_it_codice_fiscale"
+                                                    name="l10n_it_codice_fiscale"
+                                                >
+                                                    Fiscal Code:
+                                                    <span
+                                                    t-field="membership.partner_id.l10n_it_codice_fiscale"
+                                                />
+                                                </div>
+                                                <div
+                                                    t-field="membership.partner_id"
+                                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'
+                                                />
+                                                <div
+                                                    t-if="membership.l10n_it_member_type"
+                                                >
+                                                    <span
+                                                        t-field="membership.l10n_it_member_type"
+                                                    />
+                                                </div>
+                                                <div
+                                                    t-if="membership.l10n_it_special_category"
+                                                >
+                                                    Special category until
+                                                    <span
+                                                    t-field="membership.l10n_it_special_category_end"
+                                                />
+                                                </div>
+                                            </td>
+                                            <td name="admission_date">
+                                                <span
+                                                    t-field="membership.l10n_it_admission_date"
+                                                />
+                                            </td>
+                                            <td name="operations">
+                                                <table
+                                                    class="table table-sm table-borderless mb-0"
+                                                >
+                                                    <tr t-foreach="row[1]" t-as="line">
+                                                        <td class="p-0 pe-2">
+                                                            <span
+                                                                t-field="line['operation'].date"
+                                                            />
+                                                        </td>
+                                                        <td class="p-0 pe-2">
+                                                            <span
+                                                            t-out="line['label']"
+                                                        />
+                                                            (<span
+                                                            t-out="line['product'].short_name or line['product'].name"
+                                                        />)
+                                                        </td>
+                                                        <td
+                                                            class="p-0 pe-2 text-end text-nowrap"
+                                                            style="white-space: nowrap"
+                                                        >
+                                                            <span
+                                                                t-out="line['quantity']"
+                                                            />
+                                                        </td>
+                                                        <td
+                                                            class="p-0 text-end text-nowrap"
+                                                            style="white-space: nowrap"
+                                                        >
+                                                            <span
+                                                                t-out="line['amount']"
+                                                                t-options='{"widget": "monetary", "display_currency": membership.company_id.currency_id}'
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class="text-end" name="share_number">
+                                                <span t-out="row[2]['quantity']" />
+                                            </td>
+                                            <td
+                                                class="text-end text-nowrap"
+                                                name="paid_capital"
+                                            >
+                                                <span
+                                                    t-out="row[2]['amount']"
+                                                    t-options='{"widget": "monetary", "display_currency": membership.company_id.currency_id}'
+                                                />
+                                            </td>
+                                            <td name="termination">
+                                                <span
+                                                    t-field="membership.l10n_it_termination_date"
+                                                />
+                                                <div
+                                                    t-if="membership.l10n_it_termination_reason"
+                                                >
+                                                    <span
+                                                        t-field="membership.l10n_it_termination_reason"
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td name="encumbrances">
+                                                <span
+                                                    t-field="membership.l10n_it_encumbrances"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form (l10n_it_cooperator)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="cooperator.product_template_form_view" />
+        <field name="arch" type="xml">
+            <field name="short_name" position="after">
+                <field name="l10n_it_share_category" required="is_share" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form (l10n_it_cooperator)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="cooperator.view_partner_form" />
+        <field name="arch" type="xml">
+            <group name="approvals" position="before">
+                <group
+                    name="l10n_it_membership"
+                    groups="cooperator.cooperator_group_user"
+                    invisible="not cooperator"
+                >
+                    <field name="l10n_it_member_type" />
+                    <field name="l10n_it_admission_date" invisible="not member" />
+                    <field name="l10n_it_special_category" />
+                    <field
+                        name="l10n_it_special_category_end"
+                        invisible="not l10n_it_special_category"
+                        required="l10n_it_special_category"
+                    />
+                    <field name="l10n_it_termination_date" invisible="member" />
+                    <field
+                        name="l10n_it_termination_reason"
+                        invisible="not l10n_it_termination_date"
+                    />
+                    <field name="l10n_it_encumbrances" />
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="cooperative_membership_view_tree" model="ir.ui.view">
+        <field name="name">cooperative.membership.list (l10n_it_cooperator)</field>
+        <field name="model">cooperative.membership</field>
+        <field name="inherit_id" ref="cooperator.cooperative_membership_view_tree" />
+        <field name="arch" type="xml">
+            <field name="effective_date" position="before">
+                <field name="l10n_it_member_type" optional="show" />
+            </field>
+            <field name="effective_date" position="after">
+                <field name="l10n_it_termination_date" optional="hide" />
+                <field name="l10n_it_termination_reason" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="cooperative_membership_view_search" model="ir.ui.view">
+        <field name="name">cooperative.membership.search (l10n_it_cooperator)</field>
+        <field name="model">cooperative.membership</field>
+        <field name="inherit_id" ref="cooperator.cooperative_membership_view_search" />
+        <field name="arch" type="xml">
+            <filter name="cooperator_is_individual" position="before">
+                <filter
+                    string="Current Members"
+                    name="l10n_it_current_members"
+                    domain="[('member', '=', True)]"
+                />
+                <filter
+                    string="Former Members"
+                    name="l10n_it_former_members"
+                    domain="[('old_member', '=', True)]"
+                />
+                <separator />
+            </filter>
+            <field name="cooperator_register_number" position="after">
+                <field name="l10n_it_member_type" />
+            </field>
+        </field>
+    </record>
+
+    <!-- the members register also keeps the former members -->
+    <record id="cooperator.cooperator_register_action" model="ir.actions.act_window">
+        <field
+            name="domain"
+        >['|', ('member', '=', True), ('old_member', '=', True)]</field>
+        <field name="context">{'search_default_l10n_it_current_members': 1}</field>
+    </record>
+</odoo>
