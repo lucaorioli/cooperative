@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- used in both forms (person and company) -->
+    <template id="iban_template" inherit_id="cooperator_website.iban_template">
+        <xpath expr="//div[@name='iban_template_container']" position="inside">
+            <div class="row">
+                <div class="col-md-6">
+                    <div
+                        class="mb-3 field-l10n_it_codice_fiscale"
+                        name="l10n_it_codice_fiscale_container"
+                    >
+                        <label for="l10n_it_codice_fiscale" class="form-label">
+                            <t t-if="is_company">Company Fiscal Code</t>
+                            <t t-else="">Fiscal Code</t>
+                        </label>
+                        <input
+                            t-attf-class="form-control form-control-sm{{ error and 'l10n_it_codice_fiscale' in error and ' is-invalid' or '' }}"
+                            id="l10n_it_codice_fiscale"
+                            type="text"
+                            name="l10n_it_codice_fiscale"
+                            maxlength="16"
+                            t-att-readonly="logged and l10n_it_codice_fiscale"
+                            t-att-value="l10n_it_codice_fiscale"
+                            placeholder="RSSMRA85T10A562S"
+                        />
+                        <div class="form-text">
+                            Required for the subscribers living in Italy.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 field-iban" name="iban_container">
+                        <label for="iban" class="form-label">IBAN</label>
+                        <input
+                            t-attf-class="form-control form-control-sm{{ error and 'iban' in error and ' is-invalid' or '' }}"
+                            id="iban"
+                            type="text"
+                            name="iban"
+                            required="true"
+                            t-att-readonly="logged and iban"
+                            t-att-value="iban"
+                            placeholder="IT60X0542811101000000123456"
+                        />
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
