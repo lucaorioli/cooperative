@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+        id="report_cooperator_certificate_document"
+        inherit_id="cooperator.report_cooperator_certificate_document"
+    >
+        <p name="label_coop_number" position="after">
+            <p
+                name="l10n_it_codice_fiscale"
+                class="mb-4"
+                t-if="o.l10n_it_codice_fiscale"
+            >
+                <span>Fiscal code:</span>
+                <span t-field="o.l10n_it_codice_fiscale" />
+            </p>
+        </p>
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-set="coop_company" t-value="o.cooperative_membership_id.company_id" />
+            <p
+                name="l10n_it_coop_register"
+                class="mt-4"
+                t-if="coop_company.l10n_it_coop_register_number"
+            >
+                <span t-field="coop_company.name" />
+                <span
+            >is registered in the register of cooperative societies under number</span>
+                <span t-field="coop_company.l10n_it_coop_register_number" />
+                <t t-if="coop_company.l10n_it_coop_register_section">
+                    (<span t-field="coop_company.l10n_it_coop_register_section" />)</t>.
+            </p>
+        </xpath>
+    </template>
+</odoo>

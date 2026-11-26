@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form (l10n_it_cooperator)</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="cooperator.res_config_settings_cooperator_view_form"
+        />
+        <field name="arch" type="xml">
+            <setting id="cooperator_account_setting" position="after">
+                <setting
+                    id="l10n_it_share_capital_account_setting"
+                    string="Share Capital Account"
+                    help="Income account of the share category: the shares subscribed are recorded on it"
+                >
+                    <field name="l10n_it_share_capital_account_id" />
+                    <div
+                        class="text-warning mt8"
+                        invisible="l10n_it_share_capital_account_id"
+                    >
+                        Not set: the shares are recorded on the default income account of the company, if there is one, as revenue.
+                    </div>
+                </setting>
+            </setting>
+            <block name="general_settings" position="after">
+                <block title="Italy" name="l10n_it_cooperator_settings">
+                    <setting
+                        id="l10n_it_coop_register_setting"
+                        string="Register of cooperative societies"
+                        help="Registration in the Italian register of cooperative societies (Albo delle società cooperative), shown on the cooperator certificate"
+                    >
+                        <div class="content-group">
+                            <div class="row mt8">
+                                <label
+                                    for="l10n_it_coop_register_number"
+                                    string="Number"
+                                    class="col-lg-3 o_light_label"
+                                />
+                                <field name="l10n_it_coop_register_number" />
+                            </div>
+                            <div class="row">
+                                <label
+                                    for="l10n_it_coop_register_section"
+                                    string="Section"
+                                    class="col-lg-3 o_light_label"
+                                />
+                                <field name="l10n_it_coop_register_section" />
+                            </div>
+                            <div class="row">
+                                <label
+                                    for="l10n_it_coop_register_category"
+                                    string="Category"
+                                    class="col-lg-3 o_light_label"
+                                />
+                                <field name="l10n_it_coop_register_category" />
+                            </div>
+                        </div>
+                    </setting>
+                    <setting
+                        id="l10n_it_social_coop_setting"
+                        string="Social Cooperative"
+                        help="Type of social cooperative (law 381/1991): volunteer members are allowed in social cooperatives only"
+                    >
+                        <field name="l10n_it_social_coop_type" />
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>
