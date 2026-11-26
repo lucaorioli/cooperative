@@ -1,5 +1,5 @@
+from odoo import _
 from odoo.http import request
-from odoo.tools.translate import _
 
 from odoo.addons.cooperator_website.controllers.main import WebsiteSubscription
 
@@ -11,7 +11,5 @@ class RecaptchaWebsiteSubscription(WebsiteSubscription):
             return result
         result, error_msg = request.website.is_recaptcha_v2_valid(kwargs)
         if not result:
-            values["error_msg"] = _("Error validating the CAPTCHA: {0}").format(
-                error_msg
-            )
+            values["error_msg"] = _("Error validating the CAPTCHA: %s", error_msg)
         return result
