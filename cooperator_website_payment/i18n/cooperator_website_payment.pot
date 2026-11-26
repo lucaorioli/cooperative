@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -68,8 +68,22 @@ msgid "Customer Portal URL"
 msgstr ""
 
 #. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_account_move__display_name
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_payment_transaction__display_name
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cooperator_website_payment
 #: model_terms:ir.ui.view,arch_db:cooperator_website_payment.payment_confirmation_status
 msgid "Edit"
+msgstr ""
+
+#. module: cooperator_website_payment
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_account_move__id
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_payment_transaction__id
+#: model:ir.model.fields,field_description:cooperator_website_payment.field_subscription_request__id
+msgid "ID"
 msgstr ""
 
 #. module: cooperator_website_payment
