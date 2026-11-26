@@ -6,96 +6,157 @@ SPDX-FileCopyrightText: 2018 Coop IT Easy SC
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <odoo>
-    <template
-        id="report_invoice_document"
-        inherit_id="account.report_invoice_document"
-        primary="True"
-        priority="100"
-    >
-        <!-- rename heading contents -->
-        <xpath expr="//t[@name='invoice_title']" position="replace">
-            <t name="invoice_title">Request to Release Capital</t>
-        </xpath>
-        <!--
-            rename invoice date to request date. the whole block is replaced
-            because other modules (like account_debit_note) change its content.
-        -->
-        <xpath
-            expr="//div[@id='informations']/div[@name='invoice_date']"
-            position="replace"
-        >
-            <div class="col" t-if="o.invoice_date" name="invoice_date">
-                <strong>Request Date:</strong>
-                <div t-field="o.invoice_date" />
-            </div>
-        </xpath>
-        <!-- remove due date -->
-        <xpath
-            expr="//div[@id='informations']/div[@name='due_date']"
-            position="replace"
-        />
-        <!-- remove source -->
-        <xpath
-            expr="//div[@id='informations']/div[@name='origin']"
-            position="replace"
-        />
-        <!-- remove customer code -->
-        <xpath
-            expr="//div[@id='informations']/div[@name='customer_code']"
-            position="replace"
-        />
-        <!--
-            remove reference and add account number and contact
-        -->
-        <xpath
-            expr="//div[@id='informations']/div[@name='reference']"
-            position="replace"
-        >
-            <div class="col" name="account_number">
-                <strong>Account Number:</strong>
-                <t t-foreach="o.company_id.bank_journal_ids" t-as="journal">
-                    <t t-set="b" t-value="journal.bank_account_id" />
-                    <t t-if="journal.get_cooperator_payment">
-                        <p class="m-0" t-field="b.acc_number" />
-                    </t>
-                </t>
-            </div>
-            <div class="col" name="contact">
-                <strong>Your Contact:</strong>
-                <p class="m-0" t-field="o.user_id" />
-            </div>
-        </xpath>
-        <!-- add part type table header -->
-        <xpath
-            expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_description']"
-            position="after"
-        >
-            <th name="th_part_type" class="text-start">
-                <span>Part Type</span>
-            </th>
-        </xpath>
-        <!-- remove tax table header -->
-        <xpath
-            expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_taxes']"
-            position="replace"
-        />
-        <!-- add part type table cell -->
-        <xpath
-            expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']"
-            position="after"
-        >
-            <td name="account_invoice_part_type">
-                <span
-                    t-field="line.product_id.short_name"
-                    t-options="{'widget': 'text'}"
+    <!-- not inherited from the invoice report, that other modules may replace -->
+    <template id="report_invoice_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <t t-set="address">
+                <address
+                    class="mb-0"
+                    t-field="o.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
                 />
-            </td>
-        </xpath>
-        <!-- remove tax table cell -->
-        <xpath
-            expr="//table[@name='invoice_line_table']//td[@name='td_taxes']"
-            position="replace"
-        />
+            </t>
+            <div class="mt-5">
+                <div class="page">
+                    <h2 name="title">
+                        <span t-if="o.state == 'draft'">Draft</span>
+                        <span t-if="o.state == 'cancel'">Cancelled</span>
+                        <span>Request to Release Capital</span>
+                        <span t-if="o.name and o.name != '/'" t-field="o.name" />
+                    </h2>
+                    <div id="informations" class="row mt-4 mb-4">
+                        <div class="col" t-if="o.invoice_date" name="invoice_date">
+                            <strong>Request Date:</strong>
+                            <div t-field="o.invoice_date" />
+                        </div>
+                        <div class="col" name="account_number">
+                            <strong>Account Number:</strong>
+                            <t t-foreach="o.company_id.bank_journal_ids" t-as="journal">
+                                <t t-set="b" t-value="journal.bank_account_id" />
+                                <t t-if="journal.get_cooperator_payment">
+                                    <p class="m-0" t-field="b.acc_number" />
+                                </t>
+                            </t>
+                        </div>
+                        <div class="col" name="contact">
+                            <strong>Your Contact:</strong>
+                            <p class="m-0" t-field="o.user_id" />
+                        </div>
+                    </div>
+                    <table
+                        class="table table-sm o_main_table table-borderless"
+                        name="invoice_line_table"
+                    >
+                        <thead>
+                            <tr>
+                                <th name="th_description" class="text-start">
+                                    <span>Description</span>
+                                </th>
+                                <th name="th_part_type" class="text-start">
+                                    <span>Part Type</span>
+                                </th>
+                                <th name="th_quantity" class="text-end">
+                                    <span>Quantity</span>
+                                </th>
+                                <th name="th_priceunit" class="text-end">
+                                    <span>Unit Price</span>
+                                </th>
+                                <th name="th_subtotal" class="text-end">
+                                    <span>Amount</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t
+                                t-foreach="o.invoice_line_ids.filtered(lambda l: l.display_type == 'product')"
+                                t-as="line"
+                            >
+                                <tr>
+                                    <td name="account_invoice_line_name">
+                                        <span
+                                            t-field="line.name"
+                                            t-options="{'widget': 'text'}"
+                                        />
+                                    </td>
+                                    <td name="account_invoice_part_type">
+                                        <span
+                                            t-field="line.product_id.short_name"
+                                            t-options="{'widget': 'text'}"
+                                        />
+                                    </td>
+                                    <td class="text-end" name="td_quantity">
+                                        <span t-field="line.quantity" />
+                                    </td>
+                                    <td class="text-end" name="td_price_unit">
+                                        <span
+                                            class="text-nowrap"
+                                            t-field="line.price_unit"
+                                        />
+                                    </td>
+                                    <td
+                                        class="text-end o_price_total"
+                                        name="td_subtotal"
+                                    >
+                                        <span
+                                            class="text-nowrap"
+                                            t-field="line.price_subtotal"
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div id="total" class="row justify-content-end">
+                        <div class="col-6">
+                            <table class="table table-sm table-borderless">
+                                <tr class="border-black o_total">
+                                    <td>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-end">
+                                        <span
+                                            class="text-nowrap"
+                                            t-field="o.amount_total"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr
+                                    t-if="o.state == 'posted' and o.amount_residual != o.amount_total"
+                                    name="amount_due"
+                                >
+                                    <td>
+                                        <strong>Amount Due</strong>
+                                    </td>
+                                    <td class="text-end">
+                                        <span
+                                            class="text-nowrap"
+                                            t-field="o.amount_residual"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p
+                        name="payment_communication"
+                        class="mt-4"
+                        t-if="o.state == 'posted' and o.payment_reference"
+                    >
+                        Please use the following communication for your payment:
+                        <strong>
+                        <span t-field="o.payment_reference" />
+                    </strong>
+                    </p>
+                    <p
+                        name="payment_term"
+                        t-if="o.invoice_payment_term_id.note"
+                        t-field="o.invoice_payment_term_id.note"
+                    />
+                    <div name="comment" t-if="o.narration" t-field="o.narration" />
+                </div>
+            </div>
+        </t>
     </template>
 
     <template id="report_invoice">

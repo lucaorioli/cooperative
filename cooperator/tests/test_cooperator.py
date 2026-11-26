@@ -1684,3 +1684,19 @@ class CooperatorCase(TransactionCase, CooperatorTestMixin):
         date_tomorrow = date.today() + timedelta(days=1)
         with self.assertRaises(ValidationError):
             self.subscription_request_1.birthdate = date_tomorrow
+
+    def test_capital_release_request_report(self):
+        self.subscription_request_1.validate_subscription_request()
+        invoice = self.subscription_request_1.capital_release_request
+        # the report does not depend on the invoice report, which other
+        # modules may rewrite entirely
+        self.assertFalse(self.env.ref("cooperator.report_invoice_document").inherit_id)
+        html = (
+            self.env["ir.actions.report"]
+            ._render_qweb_html("cooperator.action_cooperator_invoices", invoice.ids)[0]
+            .decode()
+        )
+        self.assertIn("Request to Release Capital", html)
+        self.assertIn(invoice.name, html)
+        self.assertIn(self.share_y.short_name, html)
+        self.assertIn(invoice.payment_reference, html)
