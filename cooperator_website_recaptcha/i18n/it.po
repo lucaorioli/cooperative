@@ -20,5 +20,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/cooperator_website_recaptcha/controllers/main.py:0
 #, python-format
-msgid "Error validating the CAPTCHA: {0}"
-msgstr "Errore nella validazione del CAPTCHA: {0}"
+msgid "Error validating the CAPTCHA: %s"
+msgstr "Errore nella convalida del CAPTCHA: %s"
