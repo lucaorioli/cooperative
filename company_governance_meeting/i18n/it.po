@@ -1,0 +1,686 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* company_governance_meeting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20261124\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-27 12:50+0000\n"
+"PO-Revision-Date: 2026-11-27 12:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: company_governance_meeting
+#: model:ir.actions.report,print_report_name:company_governance_meeting.action_report_governance_meeting
+msgid "'Minutes - %s' % object.name"
+msgstr "'Verbale - %s' % object.name"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "<strong>Chair</strong>"
+msgstr "<strong>Presidente</strong>"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "<strong>Secretary</strong>"
+msgstr "<strong>Segretario</strong>"
+
+#. module: company_governance_meeting
+#: model:ir.model.constraint,message:company_governance_meeting.constraint_governance_meeting_attendee_partner_meeting_uniq
+msgid "A person can attend a meeting only once."
+msgstr "Una persona può partecipare a un'adunanza una sola volta."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting_attendee__attendance__absent
+msgid "Absent"
+msgstr "Assente"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__votes_abstained
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Abstentions"
+msgstr "Astenuti"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_needaction
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_needaction
+msgid "Action Needed"
+msgstr "Azione richiesta"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decorazione eccezione attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_state
+msgid "Activity State"
+msgstr "Stato attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona tipo attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__agenda
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Agenda"
+msgstr "Ordine del giorno"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__appointed_body_ids
+msgid "Appointed Bodies"
+msgstr "Organi nominati"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_body__appointment_resolution_id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_body_member__appointment_resolution_id
+msgid "Appointing Resolution"
+msgstr "Delibera di nomina"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__appointment_ids
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_form
+msgid "Appointments"
+msgstr "Nomine"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_resolution__outcome__approved
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_search
+msgid "Approved"
+msgstr "Approvata"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_attachment_count
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_attachment_count
+msgid "Attachment Count"
+msgstr "Numero allegati"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__attendance
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Attendance"
+msgstr "Presenza"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__attendee_count
+msgid "Attendee Count"
+msgstr "Numero aventi diritto"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__attendee_ids
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Attendees"
+msgstr "Partecipanti"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__body_id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__body_id
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_search
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_search
+msgid "Body"
+msgstr "Organo"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__state__cancelled
+msgid "Cancelled"
+msgstr "Annullata"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__chair_id
+msgid "Chair"
+msgstr "Presidente"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__company_id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__company_id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Convene"
+msgstr "Convoca"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__state__convened
+msgid "Convened"
+msgstr "Convocata"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__convocation_date
+msgid "Convocation Date"
+msgstr "Data di convocazione"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__convocation_method
+msgid "Convocation Method"
+msgstr "Modalità di convocazione"
+
+#. module: company_governance_meeting
+#: model:ir.model,name:company_governance_meeting.model_governance_body
+msgid "Corporate Body"
+msgstr "Organo sociale"
+
+#. module: company_governance_meeting
+#: model:ir.model,name:company_governance_meeting.model_governance_meeting
+msgid "Corporate Body Meeting"
+msgstr "Adunanza dell'organo sociale"
+
+#. module: company_governance_meeting
+#: model:ir.model,name:company_governance_meeting.model_governance_meeting_attendee
+msgid "Corporate Body Meeting Attendee"
+msgstr "Partecipante all'adunanza"
+
+#. module: company_governance_meeting
+#: model:ir.model,name:company_governance_meeting.model_governance_body_member
+msgid "Corporate Body Member"
+msgstr "Membro dell'organo sociale"
+
+#. module: company_governance_meeting
+#: model:ir.model,name:company_governance_meeting.model_governance_resolution
+msgid "Corporate Body Resolution"
+msgstr "Delibera dell'organo sociale"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__create_uid
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__create_uid
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__create_date
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__create_date
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__date
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__meeting_date
+msgid "Date"
+msgstr "Data"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__display_name
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__display_name
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__state__draft
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_body_member__end_resolution_id
+msgid "Ending Resolution"
+msgstr "Delibera di cessazione"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__partner_id
+msgid "Entitled Person"
+msgstr "Avente diritto"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__meeting_type__extraordinary
+msgid "Extraordinary"
+msgstr "Straordinaria"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_follower_ids
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_follower_ids
+msgid "Followers"
+msgstr "Follower"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_partner_ids
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Follower (partner)"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona Font Awesome, es. fa-tasks"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__has_message
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__has_message
+msgid "Has Message"
+msgstr "Ha messaggi"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__state__held
+msgid "Held"
+msgstr "Tenuta"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__convocation_method
+msgid ""
+"How the meeting was called, e.g. registered letter, email, notice in the "
+"official journal."
+msgstr ""
+"Modalità di convocazione, es. raccomandata, email, avviso in Gazzetta "
+"Ufficiale."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__id
+msgid "ID"
+msgstr "ID"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività eccezione."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__message_needaction
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_resolution__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionato, nuovi messaggi richiedono attenzione."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__message_has_error
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_resolution__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_is_follower
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_is_follower
+msgid "Is Follower"
+msgstr "È follower"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__write_uid
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__write_uid
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__write_date
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__write_date
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Load Members"
+msgstr "Carica membri"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__location
+msgid "Location"
+msgstr "Luogo"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Mark as Held"
+msgstr "Segna come tenuta"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Mark as Minuted"
+msgstr "Segna come verbalizzata"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__meeting_id
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__meeting_id
+msgid "Meeting"
+msgstr "Adunanza"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_body__meeting_count
+msgid "Meeting Count"
+msgstr "Numero adunanze"
+
+#. module: company_governance_meeting
+#: model:ir.actions.act_window,name:company_governance_meeting.governance_meeting_action
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_body__meeting_ids
+#: model:ir.ui.menu,name:company_governance_meeting.menu_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_body_view_form
+msgid "Meetings"
+msgstr "Adunanze"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_has_error
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore di consegna messaggio"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_ids
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__state__minuted
+msgid "Minuted"
+msgstr "Verbalizzata"
+
+#. module: company_governance_meeting
+#: model:ir.actions.report,name:company_governance_meeting.action_report_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__minutes
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Minutes"
+msgstr "Verbale"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Scadenza mia attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__name
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Name"
+msgstr "Nome"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza prossima attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riepilogo prossima attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo prossima attività"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__number
+msgid "Number"
+msgstr "Numero"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_needaction_counter
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__message_has_error_counter
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__message_needaction_counter
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_resolution__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un'azione"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__message_has_error_counter
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_resolution__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting__meeting_type__ordinary
+msgid "Ordinary"
+msgstr "Ordinaria"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__outcome
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Outcome"
+msgstr "Esito"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_resolution__outcome__postponed
+msgid "Postponed"
+msgstr "Rinviata"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting_attendee__attendance__present
+msgid "Present"
+msgstr "Presente"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__present_count
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Present or Represented"
+msgstr "Presenti o rappresentati"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__proxy_partner_id
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Proxy"
+msgstr "Delegato"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Quorum"
+msgstr "Quorum"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_resolution__outcome__rejected
+msgid "Rejected"
+msgstr "Respinta"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields.selection,name:company_governance_meeting.selection__governance_meeting_attendee__attendance__proxy
+msgid "Represented by Proxy"
+msgstr "Rappresentato per delega"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Reset to Draft"
+msgstr "Riporta in bozza"
+
+#. module: company_governance_meeting
+#: model:ir.actions.act_window,name:company_governance_meeting.governance_resolution_action
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__resolution_ids
+#: model:ir.ui.menu,name:company_governance_meeting.menu_governance_resolution
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "Resolutions"
+msgstr "Delibere"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__activity_user_id
+msgid "Responsible User"
+msgstr "Utente responsabile"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__secretary_id
+msgid "Secretary"
+msgstr "Segretario"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: company_governance_meeting
+#. odoo-python
+#: code:addons/company_governance_meeting/models/governance_meeting_attendee.py:0
+msgid "Set the proxy of %s."
+msgstr "Indicare il delegato di %s."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__signed_minutes
+msgid "Signed Minutes"
+msgstr "Verbale firmato"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__signed_minutes_filename
+msgid "Signed Minutes Filename"
+msgstr "Nome file del verbale firmato"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__state
+msgid "State"
+msgstr "Stato"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_search
+msgid "Status"
+msgstr "Stato"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stato in base alle attività\n"
+"In ritardo: la data di scadenza è già passata\n"
+"Oggi: la data dell'attività è oggi\n"
+"Pianificata: attività future."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__name
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_form
+msgid "Subject"
+msgstr "Oggetto"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__termination_ids
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_form
+msgid "Terminations"
+msgstr "Cessazioni"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__text
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_form
+msgid "Text"
+msgstr "Testo"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "The Chair"
+msgstr "Il Presidente"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "The Secretary"
+msgstr "Il Segretario"
+
+#. module: company_governance_meeting
+#. odoo-python
+#: code:addons/company_governance_meeting/models/governance_resolution.py:0
+msgid "The votes cannot be negative."
+msgstr "I voti non possono essere negativi."
+
+#. module: company_governance_meeting
+#. odoo-python
+#: code:addons/company_governance_meeting/models/governance_resolution.py:0
+msgid ""
+"The votes of %(name)s exceed the votes present or represented (%(present)s)."
+msgstr ""
+"I voti di %(name)s superano i voti presenti o rappresentati (%(present)s)."
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_search
+msgid "To Be Minuted"
+msgstr "Da verbalizzare"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__total_votes
+msgid "Total Votes"
+msgstr "Voti totali"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__meeting_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività eccezione sul record."
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting_attendee__votes
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Votes"
+msgstr "Voti"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__votes_against
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Votes Against"
+msgstr "Voti contrari"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_resolution__votes_for
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Votes For"
+msgstr "Voti favorevoli"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,field_description:company_governance_meeting.field_governance_meeting__present_votes
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.report_governance_meeting
+msgid "Votes Present or Represented"
+msgstr "Voti presenti o rappresentati"
+
+#. module: company_governance_meeting
+#: model:ir.model.fields,help:company_governance_meeting.field_governance_meeting_attendee__votes
+msgid ""
+"Votes of the attendee: 1 for one head, one vote, or the share of the capital"
+" held."
+msgstr ""
+"Voti del partecipante: 1 per «una testa, un voto», oppure la quota di "
+"capitale posseduta."
+
+#. module: company_governance_meeting
+#. odoo-python
+#: code:addons/company_governance_meeting/models/governance_meeting.py:0
+msgid "Write or attach the minutes of %s first."
+msgstr "Scrivere o allegare prima il verbale di %s."
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_resolution_view_search
+msgid "Year"
+msgstr "Anno"
+
+#. module: company_governance_meeting
+#: model_terms:ir.ui.view,arch_db:company_governance_meeting.governance_meeting_view_form
+msgid "e.g. Annual general meeting 2026"
+msgstr "es. Assemblea ordinaria di approvazione del bilancio 2026"
+
+#. module: company_governance_meeting
+#. odoo-python
+#: code:addons/company_governance_meeting/models/governance_meeting.py:0
+msgid "%s cannot be convened after its date."
+msgstr "%s non può essere convocata dopo la sua data."

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="governance_meeting_company_rule" model="ir.rule">
+        <field name="name">Corporate body meetings: multi-company</field>
+        <field name="model_id" ref="model_governance_meeting" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="governance_meeting_attendee_company_rule" model="ir.rule">
+        <field name="name">Corporate body meeting attendees: multi-company</field>
+        <field name="model_id" ref="model_governance_meeting_attendee" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="governance_resolution_company_rule" model="ir.rule">
+        <field name="name">Corporate body resolutions: multi-company</field>
+        <field name="model_id" ref="model_governance_resolution" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
