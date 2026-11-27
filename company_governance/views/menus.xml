@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        id="menu_governance_root"
+        name="Governance"
+        groups="group_governance_user"
+        web_icon="company_governance,static/description/icon.png"
+        sequence="60"
+    />
+    <menuitem
+        id="menu_governance_body"
+        parent="menu_governance_root"
+        action="governance_body_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_governance_body_member"
+        parent="menu_governance_root"
+        action="governance_body_member_action"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_governance_config"
+        name="Configuration"
+        parent="menu_governance_root"
+        groups="group_governance_manager"
+        sequence="100"
+    />
+    <menuitem
+        id="menu_governance_body_type"
+        parent="menu_governance_config"
+        action="governance_body_type_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_governance_role"
+        parent="menu_governance_config"
+        action="governance_role_action"
+        sequence="20"
+    />
+</odoo>
