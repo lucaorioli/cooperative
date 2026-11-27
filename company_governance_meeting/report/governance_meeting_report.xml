@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="action_report_governance_meeting" model="ir.actions.report">
+        <field name="name">Minutes</field>
+        <field name="model">governance.meeting</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >company_governance_meeting.report_governance_meeting</field>
+        <field
+            name="report_file"
+        >company_governance_meeting.report_governance_meeting</field>
+        <field name="print_report_name">'Minutes - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_governance_meeting" />
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_governance_meeting">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="meeting">
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="meeting" />
+                    <div class="page">
+                        <h2 t-field="meeting.name" />
+                        <p>
+                            <strong t-field="meeting.body_id" />
+                            - <span t-field="meeting.meeting_type" />
+                            <br />
+                            <span
+                            t-field="meeting.date"
+                            t-options='{"hide_seconds": True}'
+                        />
+                            <t t-if="meeting.location">
+                                - <span t-field="meeting.location" />
+                            </t>
+                        </p>
+                        <p t-if="meeting.chair_id or meeting.secretary_id">
+                            <t t-if="meeting.chair_id">
+                                <strong>Chair</strong>
+                                <span t-field="meeting.chair_id.name" />
+                                <br />
+                            </t>
+                            <t t-if="meeting.secretary_id">
+                                <strong>Secretary</strong>
+                                <span t-field="meeting.secretary_id.name" />
+                            </t>
+                        </p>
+                        <t t-if="meeting.agenda">
+                            <h4>Agenda</h4>
+                            <div t-field="meeting.agenda" />
+                        </t>
+                        <t t-if="meeting.attendee_ids">
+                            <h4>Attendees</h4>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Attendance</th>
+                                        <th>Proxy</th>
+                                        <th class="text-end">Votes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        t-foreach="meeting.attendee_ids"
+                                        t-as="attendee"
+                                    >
+                                        <td>
+                                            <span t-field="attendee.partner_id.name" />
+                                        </td>
+                                        <td>
+                                            <span t-field="attendee.attendance" />
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-field="attendee.proxy_partner_id.name"
+                                            />
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                t-out="meeting._format_votes(attendee.votes)"
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-sm w-50">
+                                <tr>
+                                    <td>Present or Represented</td>
+                                    <td class="text-end">
+                                        <span t-field="meeting.present_count" />
+                                        / <span t-field="meeting.attendee_count" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Votes Present or Represented</td>
+                                    <td class="text-end">
+                                        <span
+                                        t-out="meeting._format_votes(meeting.present_votes)"
+                                    />
+                                        / <span
+                                        t-out="meeting._format_votes(meeting.total_votes)"
+                                    />
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                        <div t-if="meeting.minutes" t-field="meeting.minutes" />
+                        <t t-foreach="meeting.resolution_ids" t-as="resolution">
+                            <h4>
+                                <span t-field="resolution.number" />
+                                - <span t-field="resolution.name" />
+                            </h4>
+                            <div t-field="resolution.text" />
+                            <table class="table table-sm w-50">
+                                <tr>
+                                    <td>Outcome</td>
+                                    <td class="text-end">
+                                        <span t-field="resolution.outcome" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Votes For</td>
+                                    <td class="text-end">
+                                        <span
+                                            t-out="meeting._format_votes(resolution.votes_for)"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Votes Against</td>
+                                    <td class="text-end">
+                                        <span
+                                            t-out="meeting._format_votes(resolution.votes_against)"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Abstentions</td>
+                                    <td class="text-end">
+                                        <span
+                                            t-out="meeting._format_votes(resolution.votes_abstained)"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                        <div class="row mt-5">
+                            <div class="col-6 text-center">
+                                <p>The Chair</p>
+                                <p t-field="meeting.chair_id.name" />
+                            </div>
+                            <div class="col-6 text-center">
+                                <p>The Secretary</p>
+                                <p t-field="meeting.secretary_id.name" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

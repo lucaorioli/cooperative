@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="governance_meeting_view_list" model="ir.ui.view">
+        <field name="model">governance.meeting</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancelled'">
+                <field name="date" readonly="state == 'minuted'" />
+                <field name="name" />
+                <field name="body_id" readonly="state == 'minuted'" />
+                <field name="meeting_type" readonly="state == 'minuted'" />
+                <field name="present_count" optional="show" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" widget="badge" />
+            </list>
+        </field>
+    </record>
+    <record id="governance_meeting_view_form" model="ir.ui.view">
+        <field name="model">governance.meeting</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_convene"
+                        type="object"
+                        string="Convene"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_hold"
+                        type="object"
+                        string="Mark as Held"
+                        class="btn-primary"
+                        invisible="state not in ('draft', 'convened')"
+                    />
+                    <button
+                        name="action_minute"
+                        type="object"
+                        string="Mark as Minuted"
+                        class="btn-primary"
+                        invisible="state != 'held'"
+                    />
+                    <button
+                        name="action_load_members"
+                        type="object"
+                        string="Load Members"
+                        invisible="state in ('minuted', 'cancelled')"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel"
+                        invisible="state in ('minuted', 'cancelled')"
+                    />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        string="Reset to Draft"
+                        invisible="state != 'cancelled'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,convened,held,minuted"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g. Annual general meeting 2026"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="body_id" />
+                            <field name="meeting_type" />
+                            <field name="date" />
+                            <field name="location" readonly="state == 'minuted'" />
+                        </group>
+                        <group>
+                            <field
+                                name="convocation_date"
+                                readonly="state == 'minuted'"
+                            />
+                            <field
+                                name="convocation_method"
+                                readonly="state == 'minuted'"
+                            />
+                            <field name="chair_id" readonly="state == 'minuted'" />
+                            <field name="secretary_id" readonly="state == 'minuted'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="agenda" string="Agenda">
+                            <field name="agenda" readonly="state == 'minuted'" />
+                        </page>
+                        <page name="attendees" string="Attendees">
+                            <field name="attendee_ids" readonly="state == 'minuted'">
+                                <list editable="bottom">
+                                    <field name="partner_id" />
+                                    <field name="attendance" />
+                                    <field
+                                        name="proxy_partner_id"
+                                        required="attendance == 'proxy'"
+                                        invisible="attendance != 'proxy'"
+                                    />
+                                    <field name="votes" />
+                                </list>
+                            </field>
+                            <group>
+                                <group string="Quorum">
+                                    <field name="attendee_count" />
+                                    <field name="present_count" />
+                                    <field name="total_votes" />
+                                    <field name="present_votes" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="resolutions" string="Resolutions">
+                            <field name="resolution_ids" readonly="state == 'minuted'">
+                                <list>
+                                    <field name="sequence" widget="handle" />
+                                    <field name="number" />
+                                    <field name="name" />
+                                    <field name="outcome" />
+                                    <field name="votes_for" />
+                                    <field name="votes_against" />
+                                    <field name="votes_abstained" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="minutes" string="Minutes">
+                            <field name="minutes" readonly="state == 'minuted'" />
+                            <group>
+                                <field
+                                    name="signed_minutes"
+                                    filename="signed_minutes_filename"
+                                />
+                                <field name="signed_minutes_filename" invisible="1" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+    <record id="governance_meeting_view_search" model="ir.ui.view">
+        <field name="model">governance.meeting</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="body_id" />
+                <filter
+                    name="to_minute"
+                    string="To Be Minuted"
+                    domain="[('state', 'in', ('convened', 'held'))]"
+                />
+                <group>
+                    <filter
+                        name="group_body"
+                        string="Body"
+                        context="{'group_by': 'body_id'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="governance_meeting_action" model="ir.actions.act_window">
+        <field name="name">Meetings</field>
+        <field name="res_model">governance.meeting</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

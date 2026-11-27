@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="governance_body_member_view_form" model="ir.ui.view">
+        <field name="model">governance.body.member</field>
+        <field
+            name="inherit_id"
+            ref="company_governance.governance_body_member_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="date_start" position="after">
+                <field name="appointment_resolution_id" />
+            </field>
+            <field name="end_reason" position="after">
+                <field name="end_resolution_id" invisible="not date_end" />
+            </field>
+        </field>
+    </record>
+</odoo>
