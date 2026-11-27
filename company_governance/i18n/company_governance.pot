@@ -1,0 +1,649 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* company_governance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20261124\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-27 12:30+0000\n"
+"PO-Revision-Date: 2026-11-27 12:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: company_governance
+#. odoo-python
+#: code:addons/company_governance/models/governance_body_member.py:0
+msgid "%s cannot be appointed before the body takes office."
+msgstr ""
+
+#. module: company_governance
+#. odoo-python
+#: code:addons/company_governance/models/governance_body_member.py:0
+msgid "%s cannot end before being appointed."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__active
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__active
+msgid "Active"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: company_governance
+#: model:res.groups,name:company_governance.group_governance_manager
+msgid "Administrator"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__role_ids
+msgid "Allowed Offices"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_alternate_member
+msgid "Alternate Member"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__date_start
+msgid "Appointed On"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_type_view_form
+msgid "Archived"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_auditor
+msgid "Auditor"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "Back in Office"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_board
+msgid "Board of Directors"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__body_id
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_search
+msgid "Body"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__body_ceased
+msgid "Body Ceased"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.actions.act_window,name:company_governance.governance_body_type_action
+#: model:ir.ui.menu,name:company_governance.menu_governance_body_type
+msgid "Body Types"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "Cease"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body__state__ceased
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_search
+msgid "Ceased"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__date_ceased
+msgid "Ceased On"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_chair
+msgid "Chair"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_ceo
+msgid "Chief Executive Officer"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_committee
+msgid "Committee"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__company_id
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__company_id
+msgid "Company"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.ui.menu,name:company_governance.menu_governance_config
+msgid "Configuration"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model,name:company_governance.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.actions.act_window,name:company_governance.governance_body_action
+#: model:ir.ui.menu,name:company_governance.menu_governance_body
+msgid "Corporate Bodies"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model,name:company_governance.model_governance_body
+msgid "Corporate Body"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model,name:company_governance.model_governance_body_member
+msgid "Corporate Body Member"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model,name:company_governance.model_governance_body_type
+msgid "Corporate Body Type"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model,name:company_governance.model_governance_role
+msgid "Corporate Office"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_res_partner__governance_member_ids
+#: model:ir.model.fields,field_description:company_governance.field_res_users__governance_member_ids
+#: model_terms:ir.ui.view,arch_db:company_governance.res_partner_view_form
+msgid "Corporate Offices"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__create_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__create_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__create_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__create_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__create_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__create_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__is_current
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_search
+msgid "Current"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__current_member_ids
+msgid "Current Members"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__date_ceased
+msgid "Date on which the body actually left office."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__date_start
+msgid "Date on which the body took office."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__death
+msgid "Death"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__description
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__description
+msgid "Description"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__display_name
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__display_name
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__display_name
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__end_reason
+msgid "End Reason"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__date_end
+msgid "End of Term"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__date_end
+msgid "Ended On"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__date_end
+msgid "Expected end of the term of office."
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "Extend"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body__state__extended
+msgid "Extended"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__state
+msgid ""
+"Extended: the term has expired, but the body stays in office until the new "
+"one is appointed."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__forfeiture
+msgid "Forfeiture"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_general_meeting
+msgid "General Meeting"
+msgstr ""
+
+#. module: company_governance
+#: model:res.groups.privilege,name:company_governance.res_groups_privilege_governance
+#: model:ir.ui.menu,name:company_governance.menu_governance_root
+msgid "Governance"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__partner_id
+msgid "Holder"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__id
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__id
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__id
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__id
+msgid "ID"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body__state__active
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_search
+msgid "In Office"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__write_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__write_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__write_uid
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__write_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__write_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__write_date
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__legal_representative
+msgid "Legal Representative"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_search
+msgid "Legal Representatives"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_member
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_search
+msgid "Member"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__member_ids
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "Members"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__name
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__name
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__name
+msgid "Name"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__note
+msgid "Note"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "Notes"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__role_id
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_search
+msgid "Office"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.actions.act_window,name:company_governance.governance_body_member_action
+#: model:ir.ui.menu,name:company_governance.menu_governance_body_member
+msgid "Office Holders"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.actions.act_window,name:company_governance.governance_role_action
+#: model:ir.ui.menu,name:company_governance.menu_governance_role
+msgid "Offices"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body_type__role_ids
+msgid ""
+"Offices that the members of this kind of body can hold. Leave empty to allow"
+" any office."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__other
+msgid "Other"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_search
+msgid "Past"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__powers
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_member_view_form
+msgid "Powers and Delegations"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__resignation
+msgid "Resignation"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__revocation
+msgid "Revocation"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_secretary
+msgid "Secretary"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__sequence
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_type__sequence
+#: model:ir.model.fields,field_description:company_governance.field_governance_role__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_sole_director
+#: model:governance.role,name:company_governance.role_sole_director
+msgid "Sole Director"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__date_start
+msgid "Start Date"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__state
+msgid "State"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_auditor
+msgid "Statutory Auditor"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.body.type,name:company_governance.body_type_supervisory_board
+msgid "Supervisory Board"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__term_note
+msgid "Term"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields.selection,name:company_governance.selection__governance_body_member__end_reason__term_expired
+msgid "Term Expired"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__term_note
+msgid ""
+"Term of office as stated in the appointment, e.g. until the approval of the "
+"financial statements of a given year."
+msgstr ""
+
+#. module: company_governance
+#. odoo-python
+#: code:addons/company_governance/models/governance_body.py:0
+msgid "The dates of %s cannot precede its start date."
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "The members still in office will leave with the body. Continue?"
+msgstr ""
+
+#. module: company_governance
+#. odoo-python
+#: code:addons/company_governance/models/governance_body_member.py:0
+msgid "The office %(role)s is not allowed in a %(type)s."
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,field_description:company_governance.field_governance_body__type_id
+#: model:ir.model.fields,field_description:company_governance.field_governance_body_member__type_id
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_search
+msgid "Type"
+msgstr ""
+
+#. module: company_governance
+#: model:ir.model.fields,help:company_governance.field_governance_body__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: company_governance
+#. odoo-python
+#: code:addons/company_governance/models/governance_body_member.py:0
+msgid "Unsupported search on Current."
+msgstr ""
+
+#. module: company_governance
+#: model:res.groups,name:company_governance.group_governance_user
+msgid "User"
+msgstr ""
+
+#. module: company_governance
+#: model:governance.role,name:company_governance.role_vice_chair
+msgid "Vice-Chair"
+msgstr ""
+
+#. module: company_governance
+#: model_terms:ir.ui.view,arch_db:company_governance.governance_body_view_form
+msgid "e.g. Board of Directors 2026-2028"
+msgstr ""

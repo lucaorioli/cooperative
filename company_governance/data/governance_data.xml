@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="role_chair" model="governance.role">
+        <field name="name">Chair</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="role_vice_chair" model="governance.role">
+        <field name="name">Vice-Chair</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="role_ceo" model="governance.role">
+        <field name="name">Chief Executive Officer</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="role_member" model="governance.role">
+        <field name="name">Member</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="role_secretary" model="governance.role">
+        <field name="name">Secretary</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="role_sole_director" model="governance.role">
+        <field name="name">Sole Director</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="role_alternate_member" model="governance.role">
+        <field name="name">Alternate Member</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="role_auditor" model="governance.role">
+        <field name="name">Auditor</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="body_type_general_meeting" model="governance.body.type">
+        <field name="name">General Meeting</field>
+        <field name="sequence">10</field>
+        <field
+            name="role_ids"
+            eval="[(6, 0, [ref('role_chair'), ref('role_secretary')])]"
+        />
+    </record>
+    <record id="body_type_board" model="governance.body.type">
+        <field name="name">Board of Directors</field>
+        <field name="sequence">20</field>
+        <field
+            name="role_ids"
+            eval="[(6, 0, [ref('role_chair'), ref('role_vice_chair'), ref('role_ceo'), ref('role_member'), ref('role_secretary')])]"
+        />
+    </record>
+    <record id="body_type_sole_director" model="governance.body.type">
+        <field name="name">Sole Director</field>
+        <field name="sequence">30</field>
+        <field name="role_ids" eval="[(6, 0, [ref('role_sole_director')])]" />
+    </record>
+    <record id="body_type_supervisory_board" model="governance.body.type">
+        <field name="name">Supervisory Board</field>
+        <field name="sequence">40</field>
+        <field
+            name="role_ids"
+            eval="[(6, 0, [ref('role_chair'), ref('role_member'), ref('role_alternate_member')])]"
+        />
+    </record>
+    <record id="body_type_auditor" model="governance.body.type">
+        <field name="name">Statutory Auditor</field>
+        <field name="sequence">50</field>
+        <field name="role_ids" eval="[(6, 0, [ref('role_auditor')])]" />
+    </record>
+    <record id="body_type_committee" model="governance.body.type">
+        <field name="name">Committee</field>
+        <field name="sequence">60</field>
+    </record>
+</odoo>

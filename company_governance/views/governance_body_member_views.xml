@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="governance_body_member_view_list" model="ir.ui.view">
+        <field name="model">governance.body.member</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="not is_current">
+                <field name="partner_id" />
+                <field name="role_id" />
+                <field name="body_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="end_reason" optional="show" />
+                <field name="legal_representative" optional="show" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="is_current" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+    <record id="governance_body_member_view_form" model="ir.ui.view">
+        <field name="model">governance.body.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="body_id" />
+                            <field name="partner_id" />
+                            <field name="role_id" />
+                            <field name="legal_representative" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="end_reason" invisible="not date_end" />
+                            <field name="is_current" />
+                        </group>
+                    </group>
+                    <group string="Powers and Delegations">
+                        <field name="powers" nolabel="1" colspan="2" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="governance_body_member_view_search" model="ir.ui.view">
+        <field name="model">governance.body.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" />
+                <field name="role_id" />
+                <field name="body_id" />
+                <filter
+                    name="current"
+                    string="Current"
+                    domain="[('is_current', '=', True)]"
+                />
+                <filter
+                    name="past"
+                    string="Past"
+                    domain="[('is_current', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="legal_representative"
+                    string="Legal Representatives"
+                    domain="[('legal_representative', '=', True)]"
+                />
+                <group>
+                    <filter
+                        name="group_body"
+                        string="Body"
+                        context="{'group_by': 'body_id'}"
+                    />
+                    <filter
+                        name="group_role"
+                        string="Office"
+                        context="{'group_by': 'role_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="governance_body_member_action" model="ir.actions.act_window">
+        <field name="name">Office Holders</field>
+        <field name="res_model">governance.body.member</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_current': 1}</field>
+    </record>
+</odoo>

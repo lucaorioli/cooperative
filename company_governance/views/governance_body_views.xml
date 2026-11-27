@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Luca Orioli <lucaorioli@gmail.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="governance_body_view_list" model="ir.ui.view">
+        <field name="model">governance.body</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-muted="state == 'ceased'"
+                decoration-warning="state == 'extended'"
+            >
+                <field name="name" />
+                <field name="type_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="date_ceased" optional="hide" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" widget="badge" />
+            </list>
+        </field>
+    </record>
+    <record id="governance_body_view_form" model="ir.ui.view">
+        <field name="model">governance.body</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_extend"
+                        type="object"
+                        string="Extend"
+                        invisible="state != 'active'"
+                        groups="company_governance.group_governance_manager"
+                    />
+                    <button
+                        name="action_cease"
+                        type="object"
+                        string="Cease"
+                        invisible="state == 'ceased'"
+                        groups="company_governance.group_governance_manager"
+                        confirm="The members still in office will leave with the body. Continue?"
+                    />
+                    <button
+                        name="action_reset_active"
+                        type="object"
+                        string="Back in Office"
+                        invisible="state == 'active'"
+                        groups="company_governance.group_governance_manager"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g. Board of Directors 2026-2028"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="type_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="term_note" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="date_ceased" invisible="state != 'ceased'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="members" string="Members">
+                            <field
+                                name="member_ids"
+                                context="{'default_date_start': date_start}"
+                            >
+                                <list
+                                    editable="bottom"
+                                    decoration-muted="not is_current"
+                                >
+                                    <field name="sequence" widget="handle" />
+                                    <field name="partner_id" />
+                                    <field name="role_id" />
+                                    <field name="date_start" />
+                                    <field name="date_end" />
+                                    <field name="end_reason" />
+                                    <field name="legal_representative" />
+                                    <field name="is_current" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="notes" string="Notes">
+                            <field name="note" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+    <record id="governance_body_view_search" model="ir.ui.view">
+        <field name="model">governance.body</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="type_id" />
+                <field
+                    name="member_ids"
+                    string="Member"
+                    filter_domain="[('member_ids.partner_id', 'ilike', self)]"
+                />
+                <filter
+                    name="in_office"
+                    string="In Office"
+                    domain="[('state', '!=', 'ceased')]"
+                />
+                <filter
+                    name="ceased"
+                    string="Ceased"
+                    domain="[('state', '=', 'ceased')]"
+                />
+                <group>
+                    <filter
+                        name="group_type"
+                        string="Type"
+                        context="{'group_by': 'type_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="governance_body_action" model="ir.actions.act_window">
+        <field name="name">Corporate Bodies</field>
+        <field name="res_model">governance.body</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_in_office': 1}</field>
+    </record>
+</odoo>

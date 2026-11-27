@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_governance_role_user,governance.role user,model_governance_role,group_governance_user,1,0,0,0
+access_governance_role_manager,governance.role manager,model_governance_role,group_governance_manager,1,1,1,1
+access_governance_body_type_user,governance.body.type user,model_governance_body_type,group_governance_user,1,0,0,0
+access_governance_body_type_manager,governance.body.type manager,model_governance_body_type,group_governance_manager,1,1,1,1
+access_governance_body_user,governance.body user,model_governance_body,group_governance_user,1,0,0,0
+access_governance_body_manager,governance.body manager,model_governance_body,group_governance_manager,1,1,1,1
+access_governance_body_member_user,governance.body.member user,model_governance_body_member,group_governance_user,1,0,0,0
+access_governance_body_member_manager,governance.body.member manager,model_governance_body_member,group_governance_manager,1,1,1,1
